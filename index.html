@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Orion Station Power Grid</title>
+<style>
+:root{--bg:#07111f;--panel:#0f2138;--panel2:#0a1728;--cyan:#67e8f9;--blue:#38bdf8;--green:#22c55e;--yellow:#facc15;--red:#ef4444;--text:#e6f4ff;--muted:#94a3b8;--wire:#67e8f9}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 10%,rgba(56,189,248,.14),transparent 28%),linear-gradient(#020817,#07111f 65%,#040a12);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;min-height:100vh}
+header{text-align:center;padding:22px;border-bottom:1px solid rgba(103,232,249,.22)}h1{margin:0;letter-spacing:.12em;text-transform:uppercase;font-size:clamp(1.6rem,3vw,2.4rem)}header p{margin:8px 0 0;color:var(--muted)}
+.wrap{max-width:1200px;margin:22px auto;padding:0 16px 36px}.layout{display:grid;grid-template-columns:1.5fr .9fr;gap:18px}
+.card{background:linear-gradient(180deg,rgba(15,33,56,.98),rgba(6,17,31,.98));border:1px solid rgba(103,232,249,.2);border-radius:18px;overflow:hidden;box-shadow:0 16px 45px rgba(0,0,0,.28)}
+.card h2{font-size:1rem;letter-spacing:.12em;text-transform:uppercase;margin:0;padding:14px 16px;border-bottom:1px solid rgba(103,232,249,.14);color:#bae6fd}
+.sim{margin:14px;background:#06111f;border:1px solid rgba(103,232,249,.12);border-radius:14px;overflow:hidden}
+svg{display:block;width:100%;height:auto}.wire{stroke:var(--wire);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px rgba(103,232,249,.65))}
+.res{stroke:#f8fafc;stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round}.node{fill:#e0f2fe;stroke:#0ea5e9;stroke-width:3}.switch{stroke:#f8fafc;stroke-width:7;stroke-linecap:round}.electron{fill:#67e8f9;filter:drop-shadow(0 0 5px #22d3ee)}
+.label{fill:#e0f2fe;font-weight:700;font-family:Inter,Arial,sans-serif}.small{fill:#94a3b8;font-size:15px;font-family:Inter,Arial,sans-serif}.warntext{fill:#fde047}.badtext{fill:#fca5a5}.goodtext{fill:#86efac}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px}.metric{background:rgba(2,8,23,.55);border:1px solid rgba(103,232,249,.12);border-radius:11px;padding:12px;text-align:center}.metric small{display:block;color:var(--muted)}.metric b{display:block;margin-top:5px}
+.controls{padding:15px;display:grid;gap:12px}.control{background:rgba(2,8,23,.45);border:1px solid rgba(148,163,184,.12);border-radius:12px;padding:12px}.row{display:flex;justify-content:space-between;gap:12px}.value{color:var(--cyan);font-variant-numeric:tabular-nums}.control label{font-weight:700}input[type=range]{width:100%;margin-top:10px}
+button{width:100%;padding:13px;border:0;border-radius:11px;font-weight:800;letter-spacing:.05em;color:#fff;background:linear-gradient(#ef4444,#b91c1c);cursor:pointer}button.on{background:linear-gradient(#22c55e,#15803d)}
+.systems{padding:14px;display:grid;gap:10px}.system{background:rgba(2,8,23,.48);border:1px solid rgba(148,163,184,.12);border-radius:12px;padding:12px}.system-head{display:flex;justify-content:space-between;align-items:center}.badge{font-size:.76rem;font-weight:800;padding:4px 8px;border-radius:999px}.good{background:rgba(34,197,94,.15);color:#86efac}.warn{background:rgba(250,204,21,.14);color:#fde047}.bad{background:rgba(239,68,68,.15);color:#fca5a5}
+.system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.system-grid div{background:#081426;border-radius:8px;padding:8px;text-align:center}.system-grid small{display:block;color:var(--muted)}.bar{height:9px;background:#0f172a;border-radius:999px;overflow:hidden;margin-top:10px}.fill{height:100%;background:linear-gradient(90deg,#22d3ee,#22c55e);transition:width .2s}
+.note,.refs{margin-top:18px;padding:16px;border:1px solid rgba(103,232,249,.15);border-radius:14px;background:rgba(14,165,233,.07);line-height:1.5}.refs{font-size:.94rem;color:#cbd5e1}
+@media(max-width:920px){.layout{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+<h1>Orion Station Power Grid</h1>
+<p>Explore series current, wire resistance, battery internal resistance, voltage loss, and power delivery.</p>
+</header>
+
+<main class="wrap">
+<div class="layout">
+<section class="card">
+<h2>Station Circuit</h2>
+<div class="sim">
+<svg viewBox="0 0 1000 650" aria-label="space station series circuit">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#67e8f9"/></marker></defs>
+
+<!-- loop and wire -->
+<path class="wire" d="M155 170 L350 170"/>
+<path class="wire" d="M430 170 L470 170"/>
+<path class="wire" d="M595 170 L805 170 L805 215"/>
+<path class="wire" d="M805 315 L805 500 L605 500"/>
+<path class="wire" d="M480 500 L155 500 L155 350"/>
+<path class="wire" d="M155 250 L155 170"/>
+
+<!-- battery -->
+<line x1="55" y1="250" x2="265" y2="250" class="wire"/>
+<line x1="90" y1="350" x2="220" y2="350" class="wire"/>
+<circle id="reactorGlow" cx="155" cy="300" r="62" fill="rgba(14,165,233,.10)"/>
+<circle cx="155" cy="300" r="38" fill="#0ea5e9" stroke="#a5f3fc" stroke-width="4"/>
+<circle cx="155" cy="300" r="13" fill="#e0f2fe"/>
+<text x="42" y="402" class="label" font-size="23">FUSION REACTOR</text>
+<text id="batteryInfo" x="262" y="400" class="small">EMF 12.0 V • r = 1.0 Ω</text>
+
+<!-- breaker -->
+<circle class="node" cx="350" cy="170" r="8"/><circle class="node" cx="430" cy="170" r="8"/>
+<line id="switchBlade" x1="350" y1="170" x2="415" y2="112" class="switch"/>
+<text x="310" y="210" class="label" font-size="21">MAIN BREAKER</text>
+
+<!-- R1 -->
+<path class="res" d="M470 170 l17.5 -12 l17.5 24 l17.5 -24 l17.5 24 l17.5 -24 l17.5 24 l17.5 -12"/>
+<circle class="node" cx="470" cy="170" r="7"/><circle class="node" cx="600" cy="170" r="7"/>
+<text x="475" y="100" class="label" font-size="20">LIFE SUPPORT (R1)</text>
+<text id="r1Info" x="455" y="150" class="small"></text>
+
+<!-- R3 -->
+<path class="res" d="M805 215 l-16 12 l32 12 l-32 12 l32 12 l-32 12 l32 12 l-32 12 l16 12"/>
+<circle class="node" cx="805" cy="215" r="7"/><circle class="node" cx="805" cy="320" r="7"/>
+<text x="660" y="255" class="label" font-size="20">COMMS (R3)</text>
+<text id="r3Info" x="550" y="288" class="small"></text>
+
+<!-- R2 -->
+<path class="res" d="M480 500 l17.5 -12 l17.5 24 l17.5 -24 l17.5 24 l17.5 -24 l17.5 24 l17.5 -12"/>
+<circle class="node" cx="480" cy="500" r="7"/><circle class="node" cx="610" cy="500" r="7"/>
+<text x="450" y="435" class="label" font-size="20">ENGINE GRID (R2)</text>
+<text id="r2Info" x="435" y="480" class="small"></text>
+
+<!-- wire resistance labels -->
+<text x="500" y="125" class="small">Main bus: <tspan id="wireTop">0.20 Ω</tspan></text>
+<text x="480" y="460" class="small">Return bus: <tspan id="wireBottom">0.20 Ω</tspan></text>
+
+<!-- arrows and electrons -->
+<g id="arrows">
+<path d="M665 170 L730 170" stroke="#67e8f9" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+<path d="M805 250 L805 420" stroke="#67e8f9" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+<path d="M735 500 L670 500" stroke="#67e8f9" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+</g>
+<g id="electrons"></g>
+
+<text id="banner" x="335" y="600" class="label badtext" font-size="25">POWER OFFLINE</text>
+<text id="currentEverywhere" x="300" y="630" class="small">Series current is identical through R1, R2, R3, the wires, and the reactor.</text>
+</svg>
+</div>
+
+<div class="metrics">
+<div class="metric"><small>EMF</small><b id="emfMetric">12.0 V</b></div>
+<div class="metric"><small>Terminal Voltage</small><b id="terminalMetric">12.0 V</b></div>
+<div class="metric"><small>Total Resistance</small><b id="totalRMetric">971.4 Ω</b></div>
+<div class="metric"><small>Series Current</small><b id="currentMetric">0.000 A</b></div>
+<div class="metric"><small>Load Power</small><b id="loadPowerMetric">0.000 W</b></div>
+<div class="metric"><small>Battery Loss</small><b id="batteryLossMetric">0.000 W</b></div>
+<div class="metric"><small>Wire Loss</small><b id="wireLossMetric">0.000 W</b></div>
+<div class="metric"><small>Efficiency</small><b id="efficiencyMetric">0.0%</b></div>
+</div>
+</section>
+
+<aside class="card">
+<h2>Mission Controls</h2>
+<div class="controls">
+<div class="control"><div class="row"><label for="emf">Reactor EMF</label><span class="value"><span id="emfLabel">12.0</span> V</span></div><input id="emf" type="range" min="3" max="24" step="0.5" value="12"></div>
+<div class="control"><div class="row"><label for="internalR">Battery Internal Resistance</label><span class="value"><span id="internalLabel">1.0</span> Ω</span></div><input id="internalR" type="range" min="0" max="25" step="0.1" value="1"></div>
+<div class="control"><div class="row"><label for="wireR">Total Wire Resistance</label><span class="value"><span id="wireLabel">0.4</span> Ω</span></div><input id="wireR" type="range" min="0" max="20" step="0.1" value="0.4"></div>
+<div class="control"><div class="row"><label for="r1">Life Support Resistance</label><span class="value"><span id="r1Label">420</span> Ω</span></div><input id="r1" type="range" min="50" max="1500" step="10" value="420"></div>
+<div class="control"><div class="row"><label for="r3">Communications Resistance</label><span class="value"><span id="r3Label">300</span> Ω</span></div><input id="r3" type="range" min="50" max="1500" step="10" value="300"></div>
+<div class="control"><div class="row"><label for="r2">Engine Resistance</label><span class="value"><span id="r2Label">250</span> Ω</span></div><input id="r2" type="range" min="50" max="1500" step="10" value="250"></div>
+<button id="breaker">ENGAGE MAIN BREAKER</button>
+</div>
+
+<div class="systems">
+<div class="system">
+<div class="system-head"><strong>🫁 Life Support</strong><span id="lifeBadge" class="badge bad">OFFLINE</span></div>
+<div class="system-grid"><div><small>Current</small><b id="lifeCurrent">0.000 A</b></div><div><small>Voltage</small><b id="lifeVoltage">0.00 V</b></div><div><small>Power</small><b id="lifePower">0.000 W</b></div></div>
+<div class="bar"><div id="lifeBar" class="fill" style="width:0%"></div></div>
+</div>
+<div class="system">
+<div class="system-head"><strong>📡 Communications</strong><span id="commsBadge" class="badge bad">OFFLINE</span></div>
+<div class="system-grid"><div><small>Current</small><b id="commsCurrent">0.000 A</b></div><div><small>Voltage</small><b id="commsVoltage">0.00 V</b></div><div><small>Power</small><b id="commsPower">0.000 W</b></div></div>
+<div class="bar"><div id="commsBar" class="fill" style="width:0%"></div></div>
+</div>
+<div class="system">
+<div class="system-head"><strong>🚀 Engine Grid</strong><span id="engineBadge" class="badge bad">OFFLINE</span></div>
+<div class="system-grid"><div><small>Current</small><b id="engineCurrent">0.000 A</b></div><div><small>Voltage</small><b id="engineVoltage">0.00 V</b></div><div><small>Power</small><b id="enginePower">0.000 W</b></div></div>
+<div class="bar"><div id="engineBar" class="fill" style="width:0%"></div></div>
+</div>
+</div>
+</aside>
+</div>
+
+<section class="note"><strong>Physics model:</strong> The battery is represented by an ideal emf source in series with internal resistance. The wires also have resistance. Every element lies in one series loop, so the same current passes through the battery, wire, and all three subsystem resistors. The terminal voltage is less than the emf when current flows because some voltage is lost inside the battery.</section>
+
+<section class="refs"><strong>References</strong><br>
+1. D. Halliday, R. Resnick and J. Walker, <em>Fundamentals of Physics</em>, 12th ed., Wiley, Hoboken, 2021, sections on current, resistance, emf, and direct-current circuits.<br>
+2. R.A. Serway and J.W. Jewett, <em>Physics for Scientists and Engineers</em>, 10th ed., Cengage, Boston, 2019, sections on Ohm's law, battery internal resistance, electrical power, and series circuits.
+</section>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const controls={emf:$('emf'),internalR:$('internalR'),wireR:$('wireR'),r1:$('r1'),r2:$('r2'),r3:$('r3')};
+let closed=false,phase=0;
+// Electron animation centerline. These coordinates match the connected SVG loop.
+const segments = [
+  [155,170,350,170], // top-left wire
+  [350,170,430,170], // main breaker
+  [430,170,805,170], // life support and top-right wire
+  [805,170,805,500], // communications and right-side wire
+  [805,500,155,500], // engine grid and bottom return wire
+  [155,500,155,170]  // left side of circuit
+];
+const totalPath=segments.reduce((s,a)=>s+Math.hypot(a[2]-a[0],a[3]-a[1]),0);
+
+function pointAt(d){d=((d%totalPath)+totalPath)%totalPath;for(const s of segments){const L=Math.hypot(s[2]-s[0],s[3]-s[1]);if(d<=L){const t=d/L;return{x:s[0]+(s[2]-s[0])*t,y:s[1]+(s[3]-s[1])*t}}d-=L}return{x:205,y:170}}
+function badge(id,text,state){const e=$(id);e.textContent=text;e.className='badge '+state}
+function stateFromVoltage(v,target){const q=v/target;if(q>=.85)return{text:'ONLINE',state:'good',pct:100};if(q>=.55)return{text:'LIMITED',state:'warn',pct:65};return{text:'CRITICAL',state:'bad',pct:25}}
+
+function update(){
+ const E=+controls.emf.value, ri=+controls.internalR.value, rw=+controls.wireR.value, R1=+controls.r1.value, R2=+controls.r2.value, R3=+controls.r3.value;
+ const Rload=R1+R2+R3, Rt=ri+rw+Rload, I=closed?E/Rt:0;
+ const Vterm=closed?E-I*ri:E, V1=I*R1,V2=I*R2,V3=I*R3;
+ const P1=I*I*R1,P2=I*I*R2,P3=I*I*R3,Pload=P1+P2+P3,Pbat=I*I*ri,Pwire=I*I*rw,Pin=E*I;
+ const eff=Pin>0?100*Pload/Pin:0;
+
+ $('emfLabel').textContent=E.toFixed(1);$('internalLabel').textContent=ri.toFixed(1);$('wireLabel').textContent=rw.toFixed(1);
+ $('r1Label').textContent=R1;$('r2Label').textContent=R2;$('r3Label').textContent=R3;
+ $('batteryInfo').textContent=`EMF ${E.toFixed(1)} V • r = ${ri.toFixed(1)} Ω`;
+ $('wireTop').textContent=(rw/2).toFixed(2)+' Ω';$('wireBottom').textContent=(rw/2).toFixed(2)+' Ω';
+ $('r1Info').textContent=`${R1} Ω • I = ${I.toFixed(4)} A • ΔV = ${V1.toFixed(2)} V`;
+ $('r2Info').textContent=`${R2} Ω • I = ${I.toFixed(4)} A • ΔV = ${V2.toFixed(2)} V`;
+ $('r3Info').textContent=`${R3} Ω • I = ${I.toFixed(4)} A • ΔV = ${V3.toFixed(2)} V`;
+
+ $('emfMetric').textContent=E.toFixed(1)+' V';$('terminalMetric').textContent=Vterm.toFixed(2)+' V';$('totalRMetric').textContent=Rt.toFixed(1)+' Ω';$('currentMetric').textContent=I.toFixed(4)+' A';
+ $('loadPowerMetric').textContent=Pload.toFixed(4)+' W';$('batteryLossMetric').textContent=Pbat.toFixed(4)+' W';$('wireLossMetric').textContent=Pwire.toFixed(4)+' W';$('efficiencyMetric').textContent=eff.toFixed(1)+'%';
+
+ [['life',I,V1,P1],['comms',I,V3,P3],['engine',I,V2,P2]].forEach(([n,c,v,p])=>{$(n+'Current').textContent=c.toFixed(4)+' A';$(n+'Voltage').textContent=v.toFixed(2)+' V';$(n+'Power').textContent=p.toFixed(4)+' W'});
+
+ $('breaker').textContent=closed?'MAIN BREAKER ENGAGED':'ENGAGE MAIN BREAKER';$('breaker').classList.toggle('on',closed);
+ $('switchBlade').setAttribute('x2',closed?'430':'415');$('switchBlade').setAttribute('y2',closed?'170':'112');$('arrows').style.display=closed?'block':'none';
+
+ if(!closed){['life','comms','engine'].forEach(n=>{badge(n+'Badge','OFFLINE','bad');$(n+'Bar').style.width='0%'});$('banner').textContent='POWER OFFLINE';$('banner').setAttribute('class','label badtext');return}
+ const life=stateFromVoltage(V1,4.0),comms=stateFromVoltage(V3,3.0),engine=stateFromVoltage(V2,3.5);
+ [['life',life],['comms',comms],['engine',engine]].forEach(([n,s])=>{badge(n+'Badge',s.text,s.state);$(n+'Bar').style.width=s.pct+'%'});
+ const arr=[life,comms,engine],all=arr.every(s=>s.state==='good'),bad=arr.some(s=>s.state==='bad');
+ $('banner').textContent=all?'STATION STABLE':bad?'SYSTEM FAILURE RISK':'POWER BALANCING';
+ $('banner').setAttribute('class','label '+(all?'goodtext':bad?'badtext':'warntext'));
+ $('reactorGlow').setAttribute('r',60+Math.min(Pin*20,22));$('reactorGlow').setAttribute('fill',Pbat>0.08?'rgba(239,68,68,.18)':'rgba(34,211,238,.18)');
+}
+
+function drawElectrons(){
+ $('electrons').innerHTML='';
+ if(!closed)return;
+ const E=+controls.emf.value,Rt=+controls.internalR.value + +controls.wireR.value + +controls.r1.value + +controls.r2.value + +controls.r3.value,I=E/Rt;
+ phase+=0.12+Math.min(I*80,.8);
+ for(let i=0;i<28;i++){const p=pointAt(phase+i*totalPath/28),c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',p.x);c.setAttribute('cy',p.y);c.setAttribute('r',7);c.setAttribute('class','electron');$('electrons').appendChild(c)}
+}
+Object.values(controls).forEach(e=>e.addEventListener('input',update));
+$('breaker').addEventListener('click',()=>{closed=!closed;update()});
+function animate(){drawElectrons();requestAnimationFrame(animate)}update();animate();
+</script>
+</body>
+</html>
