@@ -1,213 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Orion Station Power Grid</title>
 <style>
-:root{--bg:#07111f;--panel:#0f2138;--panel2:#0a1728;--cyan:#67e8f9;--blue:#38bdf8;--green:#22c55e;--yellow:#facc15;--red:#ef4444;--text:#e6f4ff;--muted:#94a3b8;--wire:#67e8f9}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 10%,rgba(56,189,248,.14),transparent 28%),linear-gradient(#020817,#07111f 65%,#040a12);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;min-height:100vh}
-header{text-align:center;padding:22px;border-bottom:1px solid rgba(103,232,249,.22)}h1{margin:0;letter-spacing:.12em;text-transform:uppercase;font-size:clamp(1.6rem,3vw,2.4rem)}header p{margin:8px 0 0;color:var(--muted)}
-.wrap{max-width:1200px;margin:22px auto;padding:0 16px 36px}.layout{display:grid;grid-template-columns:1.5fr .9fr;gap:18px}
-.card{background:linear-gradient(180deg,rgba(15,33,56,.98),rgba(6,17,31,.98));border:1px solid rgba(103,232,249,.2);border-radius:18px;overflow:hidden;box-shadow:0 16px 45px rgba(0,0,0,.28)}
-.card h2{font-size:1rem;letter-spacing:.12em;text-transform:uppercase;margin:0;padding:14px 16px;border-bottom:1px solid rgba(103,232,249,.14);color:#bae6fd}
-.sim{margin:14px;background:#06111f;border:1px solid rgba(103,232,249,.12);border-radius:14px;overflow:hidden}
-svg{display:block;width:100%;height:auto}.wire{stroke:var(--wire);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px rgba(103,232,249,.65))}
-.res{stroke:#f8fafc;stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round}.node{fill:#e0f2fe;stroke:#0ea5e9;stroke-width:3}.switch{stroke:#f8fafc;stroke-width:7;stroke-linecap:round}.electron{fill:#67e8f9;filter:drop-shadow(0 0 5px #22d3ee)}
-.label{fill:#e0f2fe;font-weight:700;font-family:Inter,Arial,sans-serif}.small{fill:#94a3b8;font-size:15px;font-family:Inter,Arial,sans-serif}.warntext{fill:#fde047}.badtext{fill:#fca5a5}.goodtext{fill:#86efac}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px}.metric{background:rgba(2,8,23,.55);border:1px solid rgba(103,232,249,.12);border-radius:11px;padding:12px;text-align:center}.metric small{display:block;color:var(--muted)}.metric b{display:block;margin-top:5px}
-.controls{padding:15px;display:grid;gap:12px}.control{background:rgba(2,8,23,.45);border:1px solid rgba(148,163,184,.12);border-radius:12px;padding:12px}.row{display:flex;justify-content:space-between;gap:12px}.value{color:var(--cyan);font-variant-numeric:tabular-nums}.control label{font-weight:700}input[type=range]{width:100%;margin-top:10px}
-button{width:100%;padding:13px;border:0;border-radius:11px;font-weight:800;letter-spacing:.05em;color:#fff;background:linear-gradient(#ef4444,#b91c1c);cursor:pointer}button.on{background:linear-gradient(#22c55e,#15803d)}
-.systems{padding:14px;display:grid;gap:10px}.system{background:rgba(2,8,23,.48);border:1px solid rgba(148,163,184,.12);border-radius:12px;padding:12px}.system-head{display:flex;justify-content:space-between;align-items:center}.badge{font-size:.76rem;font-weight:800;padding:4px 8px;border-radius:999px}.good{background:rgba(34,197,94,.15);color:#86efac}.warn{background:rgba(250,204,21,.14);color:#fde047}.bad{background:rgba(239,68,68,.15);color:#fca5a5}
-.system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.system-grid div{background:#081426;border-radius:8px;padding:8px;text-align:center}.system-grid small{display:block;color:var(--muted)}.bar{height:9px;background:#0f172a;border-radius:999px;overflow:hidden;margin-top:10px}.fill{height:100%;background:linear-gradient(90deg,#22d3ee,#22c55e);transition:width .2s}
-.note,.refs{margin-top:18px;padding:16px;border:1px solid rgba(103,232,249,.15);border-radius:14px;background:rgba(14,165,233,.07);line-height:1.5}.refs{font-size:.94rem;color:#cbd5e1}
-@media(max-width:920px){.layout{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}}
+:root{color-scheme:dark;--bg:#07111f;--panel:#0f2138;--cyan:#67e8f9;--blue:#38bdf8;--text:#e6f4ff;--muted:#94a3b8;--line:rgba(103,232,249,.2)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 10%,#13355270,transparent 40%),linear-gradient(#020817,#07111f);color:var(--text);font-family:system-ui,Arial,sans-serif;min-height:100vh}header{padding:28px 20px;border-bottom:1px solid var(--line)}.header-inner{max-width:1340px;margin:auto}h1{margin:5px 0;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:.07em}p{line-height:1.5}.eyebrow{color:var(--cyan);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase}header p{margin:8px 0;color:var(--muted)}main{max-width:1380px;margin:20px auto;padding:0 20px 40px}.toolbar,.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.toolbar{margin-bottom:18px}.toolbar select{min-width:160px}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(340px,1fr);gap:18px;align-items:start}.card{background:linear-gradient(180deg,#0f2138ee,#06111fee);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 16px 45px #0003;min-width:0}.card h2{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin:0;padding:16px;border-bottom:1px solid var(--line);color:#bae6fd}.pad{padding:16px}.sim{margin:14px;border:1px solid var(--line);border-radius:12px;background:#06111f;overflow:hidden}svg{display:block;width:100%;height:auto}.wire{stroke:#67e8f9;stroke-width:3;fill:none;stroke-linejoin:round}.component{stroke:#e6f4ff;stroke-width:3;fill:#0f2138}.node{fill:#e0f2fe;stroke:#0ea5e9;stroke-width:2;cursor:pointer}.node:hover{fill:#facc15}.node-label{fill:#94a3b8;font-size:11px}.svg-label{fill:#e6f4ff;font:600 13px system-ui}.svg-small{fill:#94a3b8;font:11px system-ui}.particle{fill:#67e8f9}.muted,small{color:var(--muted)}.muted{font-size:.84rem;line-height:1.5}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:0 14px 14px}.metric{background:#02081780;border:1px solid var(--line);border-radius:10px;padding:12px 6px;text-align:center}.metric small{font-size:.72rem;display:block}.metric b{display:block;margin-top:6px;font-variant-numeric:tabular-nums;font-size:.94rem}.control{padding:12px;background:#02081760;border:1px solid #94a3b822;border-radius:10px;margin-bottom:10px}.control label{font-size:.85rem;font-weight:600}.control .row{justify-content:space-between;flex-wrap:nowrap}.control input[type=number]{width:94px}input[type=range]{width:100%;accent-color:#38bdf8;margin-top:12px}input,select,button{font:inherit}input[type=number],input[type=text],select{background:#081426;border:1px solid #40617a;border-radius:7px;color:var(--text);padding:8px;max-width:100%}button{padding:10px 14px;border:1px solid #3c637d;border-radius:8px;background:#132d46;color:var(--text);cursor:pointer;font-size:.85rem;font-weight:600}button:hover{background:#214663}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid #67e8f9;outline-offset:3px}button:disabled{opacity:.4;cursor:default}.primary{background:#0e7490;border-color:#22d3ee}.primary:hover{background:#0891b2}.danger{background:#7f1d1d;border-color:#ef4444}.good{color:#86efac}.warn{color:#fde047}.bad{color:#fca5a5}.badge{font-size:.7rem;font-weight:700;border:1px solid currentColor;border-radius:999px;padding:3px 7px}.status{padding:0 16px 14px;display:flex;justify-content:space-between;gap:10px;align-items:center}.load{border:1px solid #94a3b833;border-radius:10px;padding:12px;margin-bottom:10px;background:#02081750}.load-header{display:flex;justify-content:space-between;align-items:center;gap:6px}.load-title{font-weight:700}.load .row{margin-top:10px}.load input[type=text]{width:100%;margin-top:10px}.load .readings{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;text-align:center}.readings div{background:#081426;padding:7px;border-radius:6px}.readings small{display:block;font-size:.65rem}.readings b{font-size:.8rem}.load-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.load-controls label{font-size:.7rem;color:var(--muted)}.load-controls input,.load-controls select{width:100%;margin-top:4px}.bar{height:6px;background:#1e293b;border-radius:6px;overflow:hidden;margin-top:10px}.fill{height:100%;background:#22d3ee}.lower{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.equations{font: .85rem/1.9 ui-monospace,monospace;overflow-wrap:anywhere}.meter-display{font:600 1.5rem ui-monospace,monospace;color:#67e8f9;padding:16px;background:#020817;margin:12px 0;border-radius:8px}.meter-fields{display:flex;gap:10px;flex-wrap:wrap}.meter-fields label{font-size:.8rem;flex:1;min-width:120px}.meter-fields select{display:block;width:100%;margin-top:6px}.note{margin-top:18px;border:1px solid var(--line);border-radius:12px;padding:16px;background:#0e749014;font-size:.85rem;line-height:1.6}.notice{min-height:24px;color:#67e8f9;font-size:.85rem;margin-bottom:10px}summary{cursor:pointer;font-size:.85rem;padding:12px 16px;background:#02081744}details{border-top:1px solid var(--line)}.challenge-result{margin-top:12px;font-weight:600;font-size:.85rem}.wide{width:100%}.flow-controls{padding:0 16px 14px}.flow-controls label{font-size:.8rem}.hint{font-size:.75rem;color:#94a3b8;margin-top:8px}.refs{margin-top:12px;color:#94a3b8;font-size:.75rem;line-height:1.6}@media(max-width:1050px){.layout{grid-template-columns:1fr}.lower{grid-template-columns:1fr 1fr}}@media(max-width:600px){.sim{overflow-x:auto}.sim svg{min-width:640px}main{padding:0 10px}.metrics{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}.toolbar>*{flex:1}.toolbar button{white-space:nowrap}.status{align-items:flex-start;flex-direction:column}header{padding:20px 14px}}
 </style>
 </head>
 <body>
-<header>
-<h1>Orion Station Power Grid</h1>
-<p>Explore series current, wire resistance, battery internal resistance, voltage loss, and power delivery.</p>
-</header>
-
-<main class="wrap">
+<header><div class="header-inner"><span class="eyebrow">Interactive circuit lab · Orion</span><h1>Orion Station Power Grid</h1><p>Build a load network, measure its behavior, and keep the station online.</p></div></header>
+<main>
+<div class="toolbar"><label for="topology">Circuit</label><select id="topology"><option value="series">Series</option><option value="parallel">Parallel</option></select><label for="preset">Scenario</label><select id="preset"><option value="default">Default station</option><option value="balanced">Balanced systems</option><option value="weak">Weak battery</option><option value="wire">High wire resistance</option><option value="overload">Overload demo</option></select><button id="applyPreset">Apply scenario</button><button id="reset">Reset</button><button id="save">Save</button><button id="load">Load</button><button id="export">Export JSON</button><button id="import">Import JSON</button><input hidden id="fileInput" type="file" accept=".json,application/json"></div>
+<div id="notice" class="notice" role="status" aria-live="polite"></div>
 <div class="layout">
-<section class="card">
-<h2>Station Circuit</h2>
-<div class="sim">
-<svg viewBox="0 0 1000 650" aria-label="space station series circuit">
-<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#67e8f9"/></marker></defs>
-
-<!-- loop and wire -->
-<path class="wire" d="M155 170 L350 170"/>
-<path class="wire" d="M430 170 L470 170"/>
-<path class="wire" d="M595 170 L805 170 L805 215"/>
-<path class="wire" d="M805 315 L805 500 L605 500"/>
-<path class="wire" d="M480 500 L155 500 L155 350"/>
-<path class="wire" d="M155 250 L155 170"/>
-
-<!-- battery -->
-<line x1="55" y1="250" x2="265" y2="250" class="wire"/>
-<line x1="90" y1="350" x2="220" y2="350" class="wire"/>
-<circle id="reactorGlow" cx="155" cy="300" r="62" fill="rgba(14,165,233,.10)"/>
-<circle cx="155" cy="300" r="38" fill="#0ea5e9" stroke="#a5f3fc" stroke-width="4"/>
-<circle cx="155" cy="300" r="13" fill="#e0f2fe"/>
-<text x="42" y="402" class="label" font-size="23">FUSION REACTOR</text>
-<text id="batteryInfo" x="262" y="400" class="small">EMF 12.0 V • r = 1.0 Ω</text>
-
-<!-- breaker -->
-<circle class="node" cx="350" cy="170" r="8"/><circle class="node" cx="430" cy="170" r="8"/>
-<line id="switchBlade" x1="350" y1="170" x2="415" y2="112" class="switch"/>
-<text x="310" y="210" class="label" font-size="21">MAIN BREAKER</text>
-
-<!-- R1 -->
-<path class="res" d="M470 170 l17.5 -12 l17.5 24 l17.5 -24 l17.5 24 l17.5 -24 l17.5 24 l17.5 -12"/>
-<circle class="node" cx="470" cy="170" r="7"/><circle class="node" cx="600" cy="170" r="7"/>
-<text x="475" y="100" class="label" font-size="20">LIFE SUPPORT (R1)</text>
-<text id="r1Info" x="455" y="150" class="small"></text>
-
-<!-- R3 -->
-<path class="res" d="M805 215 l-16 12 l32 12 l-32 12 l32 12 l-32 12 l32 12 l-32 12 l16 12"/>
-<circle class="node" cx="805" cy="215" r="7"/><circle class="node" cx="805" cy="320" r="7"/>
-<text x="660" y="255" class="label" font-size="20">COMMS (R3)</text>
-<text id="r3Info" x="550" y="288" class="small"></text>
-
-<!-- R2 -->
-<path class="res" d="M480 500 l17.5 -12 l17.5 24 l17.5 -24 l17.5 24 l17.5 -24 l17.5 24 l17.5 -12"/>
-<circle class="node" cx="480" cy="500" r="7"/><circle class="node" cx="610" cy="500" r="7"/>
-<text x="450" y="435" class="label" font-size="20">ENGINE GRID (R2)</text>
-<text id="r2Info" x="435" y="480" class="small"></text>
-
-<!-- wire resistance labels -->
-<text x="500" y="125" class="small">Main bus: <tspan id="wireTop">0.20 Ω</tspan></text>
-<text x="480" y="460" class="small">Return bus: <tspan id="wireBottom">0.20 Ω</tspan></text>
-
-<!-- arrows and electrons -->
-<g id="arrows">
-<path d="M665 170 L730 170" stroke="#67e8f9" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
-<path d="M805 250 L805 420" stroke="#67e8f9" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
-<path d="M735 500 L670 500" stroke="#67e8f9" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
-</g>
-<g id="electrons"></g>
-
-<text id="banner" x="335" y="600" class="label badtext" font-size="25">POWER OFFLINE</text>
-<text id="currentEverywhere" x="300" y="630" class="small">Series current is identical through R1, R2, R3, the wires, and the reactor.</text>
-</svg>
+<section class="card"><h2>Station circuit</h2><div class="sim"><svg id="circuit" viewBox="0 0 800 420" role="img" aria-label="Circuit diagram"><g id="drawing"></g><g id="particles" aria-hidden="true"></g></svg></div><div class="status"><strong id="banner">POWER OFFLINE</strong><span id="topologyHint" class="muted"></span></div><div class="metrics" id="metrics"></div><div class="flow-controls row"><label for="flow">Flow display</label><select id="flow"><option value="conventional">Conventional current</option><option value="electron">Electron flow (opposite)</option></select><button id="pause">Pause animation</button></div><details open><summary>Virtual multimeter</summary><div class="pad"><div class="meter-fields"><label>Measurement<select id="meterMode"><option value="voltage">Voltage between nodes</option><option value="current">Current through component</option></select></label><label id="redField">Red probe<select id="redProbe"></select></label><label id="blackField">Black probe<select id="blackProbe"></select></label><label id="componentField" hidden>Component<select id="meterComponent"></select></label></div><div id="meterValue" class="meter-display">0.000 V</div><p class="muted" id="meterHelp">Click labeled circuit nodes to alternate red and black probes. Readings assume an ideal meter.</p></div></details><details open><summary>Worked calculations</summary><div class="pad equations" id="equations"></div></details></section>
+<aside class="card"><h2>Mission controls</h2><div class="pad"><div id="sourceControls"></div><div class="control"><div class="row"><label for="protection">Overcurrent protection</label><input type="checkbox" id="protection" checked></div><div class="row" style="margin-top:8px"><label for="tripLimit">Trip threshold (A)</label><input id="tripLimit" type="number" required min="0.001" max="100" step="0.01" value="0.15"></div><p class="hint">A tripped breaker stays open until you re-engage it.</p></div><button id="breaker" class="primary wide">Engage main breaker</button><p id="breakerReason" class="hint" aria-live="polite"></p></div><h2>Load editor & subsystem telemetry</h2><div class="pad"><p class="muted" style="margin-top:0">Add up to six resistive loads. Topology determines how they connect. Set faults and target voltages per load.</p><div id="loads"></div><button id="addLoad" class="wide">+ Add resistive load</button></div></aside>
 </div>
-
-<div class="metrics">
-<div class="metric"><small>EMF</small><b id="emfMetric">12.0 V</b></div>
-<div class="metric"><small>Terminal Voltage</small><b id="terminalMetric">12.0 V</b></div>
-<div class="metric"><small>Total Resistance</small><b id="totalRMetric">971.4 Ω</b></div>
-<div class="metric"><small>Series Current</small><b id="currentMetric">0.000 A</b></div>
-<div class="metric"><small>Load Power</small><b id="loadPowerMetric">0.000 W</b></div>
-<div class="metric"><small>Battery Loss</small><b id="batteryLossMetric">0.000 W</b></div>
-<div class="metric"><small>Wire Loss</small><b id="wireLossMetric">0.000 W</b></div>
-<div class="metric"><small>Efficiency</small><b id="efficiencyMetric">0.0%</b></div>
-</div>
-</section>
-
-<aside class="card">
-<h2>Mission Controls</h2>
-<div class="controls">
-<div class="control"><div class="row"><label for="emf">Reactor EMF</label><span class="value"><span id="emfLabel">12.0</span> V</span></div><input id="emf" type="range" min="3" max="24" step="0.5" value="12"></div>
-<div class="control"><div class="row"><label for="internalR">Battery Internal Resistance</label><span class="value"><span id="internalLabel">1.0</span> Ω</span></div><input id="internalR" type="range" min="0" max="25" step="0.1" value="1"></div>
-<div class="control"><div class="row"><label for="wireR">Total Wire Resistance</label><span class="value"><span id="wireLabel">0.4</span> Ω</span></div><input id="wireR" type="range" min="0" max="20" step="0.1" value="0.4"></div>
-<div class="control"><div class="row"><label for="r1">Life Support Resistance</label><span class="value"><span id="r1Label">420</span> Ω</span></div><input id="r1" type="range" min="50" max="1500" step="10" value="420"></div>
-<div class="control"><div class="row"><label for="r3">Communications Resistance</label><span class="value"><span id="r3Label">300</span> Ω</span></div><input id="r3" type="range" min="50" max="1500" step="10" value="300"></div>
-<div class="control"><div class="row"><label for="r2">Engine Resistance</label><span class="value"><span id="r2Label">250</span> Ω</span></div><input id="r2" type="range" min="50" max="1500" step="10" value="250"></div>
-<button id="breaker">ENGAGE MAIN BREAKER</button>
-</div>
-
-<div class="systems">
-<div class="system">
-<div class="system-head"><strong>🫁 Life Support</strong><span id="lifeBadge" class="badge bad">OFFLINE</span></div>
-<div class="system-grid"><div><small>Current</small><b id="lifeCurrent">0.000 A</b></div><div><small>Voltage</small><b id="lifeVoltage">0.00 V</b></div><div><small>Power</small><b id="lifePower">0.000 W</b></div></div>
-<div class="bar"><div id="lifeBar" class="fill" style="width:0%"></div></div>
-</div>
-<div class="system">
-<div class="system-head"><strong>📡 Communications</strong><span id="commsBadge" class="badge bad">OFFLINE</span></div>
-<div class="system-grid"><div><small>Current</small><b id="commsCurrent">0.000 A</b></div><div><small>Voltage</small><b id="commsVoltage">0.00 V</b></div><div><small>Power</small><b id="commsPower">0.000 W</b></div></div>
-<div class="bar"><div id="commsBar" class="fill" style="width:0%"></div></div>
-</div>
-<div class="system">
-<div class="system-head"><strong>🚀 Engine Grid</strong><span id="engineBadge" class="badge bad">OFFLINE</span></div>
-<div class="system-grid"><div><small>Current</small><b id="engineCurrent">0.000 A</b></div><div><small>Voltage</small><b id="engineVoltage">0.00 V</b></div><div><small>Power</small><b id="enginePower">0.000 W</b></div></div>
-<div class="bar"><div id="engineBar" class="fill" style="width:0%"></div></div>
-</div>
-</div>
-</aside>
-</div>
-
-<section class="note"><strong>Physics model:</strong> The battery is represented by an ideal emf source in series with internal resistance. The wires also have resistance. Every element lies in one series loop, so the same current passes through the battery, wire, and all three subsystem resistors. The terminal voltage is less than the emf when current flows because some voltage is lost inside the battery.</section>
-
-<section class="refs"><strong>References</strong><br>
-1. D. Halliday, R. Resnick and J. Walker, <em>Fundamentals of Physics</em>, 12th ed., Wiley, Hoboken, 2021, sections on current, resistance, emf, and direct-current circuits.<br>
-2. R.A. Serway and J.W. Jewett, <em>Physics for Scientists and Engineers</em>, 10th ed., Cengage, Boston, 2019, sections on Ohm's law, battery internal resistance, electrical power, and series circuits.
-</section>
+<div class="lower"><section class="card"><h2>Mission challenges</h2><div class="pad"><label for="challenge" class="muted">Choose a goal</label><select id="challenge" class="wide" style="margin-top:8px"><option value="balance">Keep every subsystem ONLINE at ≥95% efficiency</option><option value="parallel">Build a parallel network with total current ≤0.10 A and all loads ONLINE</option><option value="fault">Isolate a failed branch: one open fault, other branches ONLINE</option></select><p id="challengeHint" class="muted"></p><button id="checkChallenge">Check mission</button><div id="challengeResult" class="challenge-result" role="status" aria-live="polite"></div></div></section><section class="card"><h2>Experiment guide</h2><div class="pad"><p class="muted">In series, every load carries the same current and shares the available voltage. In parallel, loads share a voltage and their currents add at the supply.</p><p class="muted">Try opening one load in each topology. Then raise wire resistance and watch the terminal voltage, load voltage, and efficiency change.</p><p class="muted">ONLINE ≥85% of target · LIMITED ≥55% · CRITICAL &lt;55%. Targets are teaching thresholds, not device ratings. Shorted loads receive zero voltage.</p><p class="muted">Save keeps a manual snapshot in this browser. Export downloads a portable JSON configuration.</p></div></section></div>
+<section class="note"><strong>Physics model:</strong> An ideal DC voltage source has series internal resistance and shared supply/return wire resistance. Loads are ideal resistors in a series chain or parallel branches. Open faults have infinite resistance; short faults have zero resistance. This editor supports these two network layouts, not arbitrary wiring. Animated markers illustrate flow direction and relative current, not physical electron speed. A zero-resistance path with an ideal source is reported as an ideal short circuit.</section>
+<div class="refs">References: Halliday, Resnick & Walker, <em>Fundamentals of Physics</em>, 12th ed. (2021); Serway & Jewett, <em>Physics for Scientists and Engineers</em>, 10th ed. (2019). DC circuits, Ohm’s law, internal resistance, and electrical power.</div>
 </main>
-
 <script>
-const $=id=>document.getElementById(id);
-const controls={emf:$('emf'),internalR:$('internalR'),wireR:$('wireR'),r1:$('r1'),r2:$('r2'),r3:$('r3')};
-let closed=false,phase=0;
-// Electron animation centerline. These coordinates match the connected SVG loop.
-const segments = [
-  [155,170,350,170], // top-left wire
-  [350,170,430,170], // main breaker
-  [430,170,805,170], // life support and top-right wire
-  [805,170,805,500], // communications and right-side wire
-  [805,500,155,500], // engine grid and bottom return wire
-  [155,500,155,170]  // left side of circuit
-];
-const totalPath=segments.reduce((s,a)=>s+Math.hypot(a[2]-a[0],a[3]-a[1]),0);
+'use strict';
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',STORAGE_KEY='orion-circuit-v2';
+const copy=o=>JSON.parse(JSON.stringify(o));
+const defaults={version:2,topology:'series',emf:12,internalR:1,wireR:.4,protection:true,tripLimit:.15,loads:[{id:'life',name:'Life Support',r:420,target:4,fault:'normal'},{id:'comms',name:'Communications',r:300,target:3,fault:'normal'},{id:'engine',name:'Engine Grid',r:250,target:3.5,fault:'normal'}]};
+let state=copy(defaults),closed=false,tripped=false,result,paths=[],phase=0,lastTime=0,paused=false,nextProbe='red',idCounter=0;
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=(n,d=4)=>Number.isFinite(n)?n.toFixed(d):n===Infinity?'∞':'—';
+const say=s=>{$('notice').textContent=s};
 
-function pointAt(d){d=((d%totalPath)+totalPath)%totalPath;for(const s of segments){const L=Math.hypot(s[2]-s[0],s[3]-s[1]);if(d<=L){const t=d/L;return{x:s[0]+(s[2]-s[0])*t,y:s[1]+(s[3]-s[1])*t}}d-=L}return{x:205,y:170}}
-function badge(id,text,state){const e=$(id);e.textContent=text;e.className='badge '+state}
-function stateFromVoltage(v,target){const q=v/target;if(q>=.85)return{text:'ONLINE',state:'good',pct:100};if(q>=.55)return{text:'LIMITED',state:'warn',pct:65};return{text:'CRITICAL',state:'bad',pct:25}}
+// Pure calculation engine: all UI and animation use this same result.
+function calculateCircuit(s,on){
+ const resistances=s.loads.map(l=>l.fault==='open'?Infinity:l.fault==='short'?0:l.r);
+ let req;
+ if(s.topology==='series')req=resistances.reduce((a,b)=>a+b,0);
+ else req=resistances.includes(0)?0:1/resistances.reduce((a,r)=>a+(Number.isFinite(r)?1/r:0),0);
+ const sourceR=s.internalR+s.wireR,rt=sourceR+req,idealShort=on&&rt===0;
+ const current=on?(rt===0?Infinity:Number.isFinite(rt)?s.emf/rt:0):0;
+ const active=on&&!idealShort,terminal=idealShort?NaN:s.emf-current*s.internalR;
+ const loadV=active?(Number.isFinite(req)?current*req:s.emf):0;
+ const loads=s.loads.map((l,i)=>{
+  let c=0,v=0;
+  if(active){
+   if(s.topology==='series'){c=current;v=Number.isFinite(resistances[i])?c*resistances[i]:resistances.filter(r=>r===Infinity).length===1?s.emf:NaN;}
+   else {v=loadV;c=resistances[i]===0?NaN:Number.isFinite(resistances[i])?v/resistances[i]:0;}
+  }
+  const power=l.fault==='normal'?c*c*l.r:0;
+  let status=!on?'OFFLINE':idealShort?'IDEAL SHORT':l.fault==='open'?'OPEN FAULT':l.fault==='short'?'SHORTED':v>=.85*l.target?'ONLINE':v>=.55*l.target?'LIMITED':'CRITICAL';
+  return {...l,resistance:resistances[i],current:c,voltage:v,power,status};
+ });
+ // A zero-ohm parallel branch takes all finite supply current; the split is undefined for multiple shorts.
+ const shortLoads=loads.filter(l=>l.fault==='short');
+ if(active&&s.topology==='parallel'&&shortLoads.length){for(const l of shortLoads)l.current=shortLoads.length===1?current:NaN;}
+ const loadPower=loads.reduce((p,l)=>p+l.power,0),batteryLoss=idealShort?NaN:current*current*s.internalR,wireLoss=idealShort?NaN:current*current*s.wireR,inputPower=s.emf*current;
+ return {req,rt,current,terminal,loadV,loads,loadPower,batteryLoss,wireLoss,inputPower,efficiency:inputPower>0&&Number.isFinite(inputPower)?100*loadPower/inputPower:0,idealShort};
+}
 
+function makeControls(){
+ $('sourceControls').innerHTML=[['emf','Reactor EMF (V)',.5,48,.5],['internalR','Internal resistance (Ω)',0,100,.1],['wireR','Total wire resistance (Ω)',0,100,.1]].map(([id,label,min,max,step])=>`<div class="control"><div class="row"><label for="${id}Number">${label}</label><input id="${id}Number" type="number" required min="${min}" max="${max}" step="${step}" value="${state[id]}" data-source="${id}"></div><input aria-label="${label} slider" id="${id}Range" type="range" min="${min}" max="${max}" step="${step}" value="${state[id]}" data-source="${id}"></div>`).join('');
+ $('topology').value=state.topology;$('protection').checked=state.protection;$('tripLimit').value=state.tripLimit;
+ $('loads').innerHTML=state.loads.map((l,i)=>`<div class="load" data-id="${l.id}"><div class="load-header"><span class="load-title">R${i+1}</span><span id="badge-${l.id}" class="badge bad">OFFLINE</span><button data-remove="${l.id}" aria-label="Remove ${escapeHTML(l.name)}" ${state.loads.length===1?'disabled':''}>Remove</button></div><input type="text" aria-label="R${i+1} name" value="${escapeHTML(l.name)}" maxlength="36" data-load="${l.id}" data-key="name"><div class="load-controls"><label>Resistance (Ω)<input type="number" min="1" max="100000" step="1" value="${l.r}" data-load="${l.id}" data-key="r"></label><label>Target voltage (V)<input type="number" min="0.1" max="100" step="0.1" value="${l.target}" data-load="${l.id}" data-key="target"></label></div><input type="range" aria-label="${escapeHTML(l.name)} resistance slider" min="1" max="${Math.max(1500,l.r)}" step="1" value="${l.r}" data-load="${l.id}" data-key="r"><div class="row"><label class="muted">Fault <select aria-label="${escapeHTML(l.name)} fault" data-load="${l.id}" data-key="fault"><option value="normal" ${l.fault==='normal'?'selected':''}>Normal</option><option value="open" ${l.fault==='open'?'selected':''}>Open circuit</option><option value="short" ${l.fault==='short'?'selected':''}>Short circuit</option></select></label></div><div class="readings"><div><small>Current</small><b id="i-${l.id}"></b></div><div><small>Voltage</small><b id="v-${l.id}"></b></div><div><small>Power</small><b id="p-${l.id}"></b></div></div><div class="bar"><div id="bar-${l.id}" class="fill"></div></div></div>`).join('');
+ $('addLoad').disabled=state.loads.length>=6;
+}
+function elem(tag,attrs={},text){const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);if(text!==undefined)e.textContent=text;return e;}
+function drawCircuit(){
+ const n=state.loads.length,h=Math.max(390,160+n*76),w=800;
+ $('circuit').setAttribute('viewBox',`0 0 ${w} ${h}`);
+ const g=$('drawing');g.replaceChildren();paths=[];
+ const add=(tag,a,t)=>{const e=elem(tag,a,t);g.append(e);return e;};
+ const wire=(x1,y1,x2,y2)=>add('line',{x1,y1,x2,y2,class:'wire'});
+ const label=(x,y,t,small=false)=>add('text',{x,y,class:small?'svg-small':'svg-label','text-anchor':'middle'},t);
+ const node=(x,y,key)=>{const color=$('redProbe').value===key?'#f87171':$('blackProbe').value===key?'#facc15':'#e0f2fe';const e=add('circle',{cx:x,cy:y,r:6,class:'node',fill:color,style:`fill:${color}`,tabindex:0,role:'button','aria-label':`Measure at node ${key}`});const choose=()=>{$(nextProbe==='red'?'redProbe':'blackProbe').value=key;nextProbe=nextProbe==='red'?'black':'red';updateMeter();drawCircuit();};e.addEventListener('click',choose);e.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();choose();}});label(x,y-13,key,true);};
+ const resistor=(x1,y,x2,l,i)=>{const mid=(x1+x2)/2;wire(x1,y,mid-28,y);wire(mid+28,y,x2,y);
+  if(l.fault==='open'){add('circle',{cx:mid-16,cy:y,r:4,class:'component'});add('circle',{cx:mid+16,cy:y,r:4,class:'component'});wire(mid-28,y,mid-16,y);wire(mid+16,y,mid+28,y);}
+  else if(l.fault==='short')wire(mid-28,y,mid+28,y);
+  else add('rect',{x:mid-28,y:y-10,width:56,height:20,rx:3,class:'component'});
+  label(mid,y-27,`R${i+1} · ${l.name.length>19?l.name.slice(0,17)+'…':l.name}`);label(mid,y+30,`${l.fault==='normal'?l.r+' Ω':l.fault.toUpperCase()} · ${fmt(result.loads[i].voltage,2)} V`,true);
+ };
+ const top=85,bottom=h-60;
+ wire(80,top,80,(top+bottom)/2-25);wire(80,(top+bottom)/2+25,80,bottom);
+ add('line',{x1:55,y1:(top+bottom)/2-25,x2:105,y2:(top+bottom)/2-25,class:'component'});add('line',{x1:66,y1:(top+bottom)/2+25,x2:94,y2:(top+bottom)/2+25,class:'component'});label(80,(top+bottom)/2+5,`${state.emf} V`);label(80,bottom+32,'REACTOR');
+ wire(80,top,110,top);add('rect',{x:110,y:top-10,width:60,height:20,rx:3,class:'component'});label(140,top-24,`r ${state.internalR} Ω`,true);wire(170,top,225,top);
+ add('line',{x1:225,y1:top,x2:280,y2:closed?top:top-24,class:'component'});wire(280,top,290,top);label(250,top-36,tripped?'TRIPPED':'BREAKER',true);
+ wire(290,top,330,top);add('rect',{x:330,y:top-10,width:60,height:20,rx:3,class:'component'});label(360,top-24,`wire ${fmt(state.wireR/2,2)} Ω`,true);wire(390,top,450,top);
+ wire(80,bottom,270,bottom);add('rect',{x:270,y:bottom-10,width:60,height:20,rx:3,class:'component'});label(300,bottom+30,`return wire ${fmt(state.wireR/2,2)} Ω`,true);node(110,bottom,'G');node(195,top,'T');
+ if(state.topology==='series'){
+  wire(450,top,745,top);wire(745,top,745,140);
+  const points=[[80,top],[745,top],[745,140]];
+  for(let i=0;i<n;i++){
+   const y=140+i*76,start=i%2===0?745:450,end=i%2===0?450:745,index=n-1-i;
+   resistor(450,y,745,state.loads[index],index);node(start,y,'N'+(n-i));
+   points.push([end,y]);
+   if(i<n-1){wire(end,y,end,y+76);points.push([end,y+76]);}
+   else {node(end,y,'N0');wire(end,y,end,bottom);wire(end,bottom,330,bottom);points.push([end,bottom],[80,bottom],[80,top]);}
+  }
+  paths.push({points,current:result.current,active:closed&&!result.idealShort&&result.current>0});
+ }else{
+  const right=745;wire(450,top,right,top);wire(right,top,right,bottom);wire(450,top,450,bottom);wire(330,bottom,450,bottom);node(right,top,'B');node(450,bottom,'A');
+  for(let i=0;i<n;i++){const y=140+i*76;resistor(450,y,right,state.loads[i],i);paths.push({points:[[right,y],[450,y]],current:result.loads[i].current,active:closed&&state.loads[i].fault!=='open'&&Number.isFinite(result.loads[i].current)&&result.loads[i].current>0});}
+  const pushFlow=(points,current)=>paths.push({points,current,active:closed&&!result.idealShort&&Number.isFinite(current)&&current>0});
+  pushFlow([[80,top],[right,top],[right,140]],result.current);
+  for(let i=0;i<n-1;i++){
+   const y=140+i*76;
+   const upper=result.loads.slice(0,i+1).reduce((sum,l)=>sum+l.current,0),lower=result.loads.slice(i+1).reduce((sum,l)=>sum+l.current,0);
+   pushFlow([[right,y],[right,y+76]],lower);pushFlow([[450,y],[450,y+76]],upper);
+  }
+  pushFlow([[450,140+(n-1)*76],[450,bottom],[80,bottom],[80,top]],result.current);
+
+ }
+ $('particles').replaceChildren();for(const path of paths){path.length=0;path.segments=[];for(let j=1;j<path.points.length;j++){const a=path.points[j-1],b=path.points[j],length=Math.hypot(b[0]-a[0],b[1]-a[1]);path.segments.push({a,b,length});path.length+=length;}path.circles=[];if(path.active)for(let i=0;i<Math.max(3,Math.floor(path.length/55));i++){const c=elem('circle',{r:3,class:'particle'});$('particles').append(c);path.circles.push(c);}}
+}
+function nodeVoltages(){
+ const r=result,n=state.loads.length,v={G:0,T:r.terminal};
+ if(state.topology==='parallel'){v.A=Number.isFinite(r.current)?r.current*state.wireR/2:NaN;v.B=v.A+r.loadV;}
+ else {let voltage=Number.isFinite(r.current)?r.current*state.wireR/2:NaN;v.N0=voltage;for(let i=0;i<n;i++){voltage+=r.loads[i].voltage;v['N'+(i+1)]=voltage;}}
+ return v;
+}
+function meterOptions(){const voltages=nodeVoltages(),nodes=Object.keys(voltages);for(const [id,fallback] of [['redProbe',state.topology==='series'?'N'+state.loads.length:'B'],['blackProbe','G']]){const prev=$(id).value;$(id).innerHTML=nodes.map(n=>`<option value="${n}">${n}${n==='G'?' · reference':n==='T'?' · source terminal':''}</option>`).join('');$(id).value=nodes.includes(prev)?prev:fallback;}const prev=$('meterComponent').value;$('meterComponent').innerHTML='<option value="source">Supply / common wire</option>'+state.loads.map((l,i)=>`<option value="${l.id}">R${i+1} · ${escapeHTML(l.name)}</option>`).join('');if([...$('meterComponent').options].some(o=>o.value===prev))$('meterComponent').value=prev;}
+function updateMeter(){const voltage=$('meterMode').value==='voltage';$('redField').hidden=!voltage;$('blackField').hidden=!voltage;$('componentField').hidden=voltage;let value;if(voltage){const nodes=nodeVoltages();value=nodes[$('redProbe').value]-nodes[$('blackProbe').value];}else {value=$('meterComponent').value==='source'?result.current:result.loads.find(l=>l.id===$('meterComponent').value)?.current;} $('meterValue').textContent=fmt(value,4)+(voltage?' V':' A');$('meterHelp').textContent=voltage?'Click labeled circuit nodes to alternate red and black probes. Red minus black gives signed voltage. Readings assume an ideal meter.':'Select a component for its calculated current. — indicates an undefined current split between multiple ideal shorts.';}
 function update(){
- const E=+controls.emf.value, ri=+controls.internalR.value, rw=+controls.wireR.value, R1=+controls.r1.value, R2=+controls.r2.value, R3=+controls.r3.value;
- const Rload=R1+R2+R3, Rt=ri+rw+Rload, I=closed?E/Rt:0;
- const Vterm=closed?E-I*ri:E, V1=I*R1,V2=I*R2,V3=I*R3;
- const P1=I*I*R1,P2=I*I*R2,P3=I*I*R3,Pload=P1+P2+P3,Pbat=I*I*ri,Pwire=I*I*rw,Pin=E*I;
- const eff=Pin>0?100*Pload/Pin:0;
-
- $('emfLabel').textContent=E.toFixed(1);$('internalLabel').textContent=ri.toFixed(1);$('wireLabel').textContent=rw.toFixed(1);
- $('r1Label').textContent=R1;$('r2Label').textContent=R2;$('r3Label').textContent=R3;
- $('batteryInfo').textContent=`EMF ${E.toFixed(1)} V • r = ${ri.toFixed(1)} Ω`;
- $('wireTop').textContent=(rw/2).toFixed(2)+' Ω';$('wireBottom').textContent=(rw/2).toFixed(2)+' Ω';
- $('r1Info').textContent=`${R1} Ω • I = ${I.toFixed(4)} A • ΔV = ${V1.toFixed(2)} V`;
- $('r2Info').textContent=`${R2} Ω • I = ${I.toFixed(4)} A • ΔV = ${V2.toFixed(2)} V`;
- $('r3Info').textContent=`${R3} Ω • I = ${I.toFixed(4)} A • ΔV = ${V3.toFixed(2)} V`;
-
- $('emfMetric').textContent=E.toFixed(1)+' V';$('terminalMetric').textContent=Vterm.toFixed(2)+' V';$('totalRMetric').textContent=Rt.toFixed(1)+' Ω';$('currentMetric').textContent=I.toFixed(4)+' A';
- $('loadPowerMetric').textContent=Pload.toFixed(4)+' W';$('batteryLossMetric').textContent=Pbat.toFixed(4)+' W';$('wireLossMetric').textContent=Pwire.toFixed(4)+' W';$('efficiencyMetric').textContent=eff.toFixed(1)+'%';
-
- [['life',I,V1,P1],['comms',I,V3,P3],['engine',I,V2,P2]].forEach(([n,c,v,p])=>{$(n+'Current').textContent=c.toFixed(4)+' A';$(n+'Voltage').textContent=v.toFixed(2)+' V';$(n+'Power').textContent=p.toFixed(4)+' W'});
-
- $('breaker').textContent=closed?'MAIN BREAKER ENGAGED':'ENGAGE MAIN BREAKER';$('breaker').classList.toggle('on',closed);
- $('switchBlade').setAttribute('x2',closed?'430':'415');$('switchBlade').setAttribute('y2',closed?'170':'112');$('arrows').style.display=closed?'block':'none';
-
- if(!closed){['life','comms','engine'].forEach(n=>{badge(n+'Badge','OFFLINE','bad');$(n+'Bar').style.width='0%'});$('banner').textContent='POWER OFFLINE';$('banner').setAttribute('class','label badtext');return}
- const life=stateFromVoltage(V1,4.0),comms=stateFromVoltage(V3,3.0),engine=stateFromVoltage(V2,3.5);
- [['life',life],['comms',comms],['engine',engine]].forEach(([n,s])=>{badge(n+'Badge',s.text,s.state);$(n+'Bar').style.width=s.pct+'%'});
- const arr=[life,comms,engine],all=arr.every(s=>s.state==='good'),bad=arr.some(s=>s.state==='bad');
- $('banner').textContent=all?'STATION STABLE':bad?'SYSTEM FAILURE RISK':'POWER BALANCING';
- $('banner').setAttribute('class','label '+(all?'goodtext':bad?'badtext':'warntext'));
- $('reactorGlow').setAttribute('r',60+Math.min(Pin*20,22));$('reactorGlow').setAttribute('fill',Pbat>0.08?'rgba(239,68,68,.18)':'rgba(34,211,238,.18)');
+ result=calculateCircuit(state,closed);
+ if(closed&&state.protection&&(result.idealShort||result.current>state.tripLimit)){closed=false;tripped=true;result=calculateCircuit(state,false);}
+ const r=result;
+ $('breaker').textContent=closed?'Disengage main breaker':tripped?'Reset & engage breaker':'Engage main breaker';$('breaker').className=(closed?'danger':'primary')+' wide';$('breakerReason').textContent=tripped?'Overcurrent trip. Reduce current or adjust the threshold before re-engaging.':r.idealShort?'Ideal short circuit: current is unbounded in this model.':'';
+ const all=r.loads.every(l=>l.status==='ONLINE');$('banner').textContent=tripped?'BREAKER TRIPPED':!closed?'POWER OFFLINE':r.idealShort?'IDEAL SHORT CIRCUIT':all?'STATION STABLE':'POWER BALANCING / FAULT';$('banner').className=closed&&all?'good':closed||tripped?'warn':'bad';$('topologyHint').textContent=state.topology==='series'?'Same current · shared voltage':'Same load voltage · branch currents add';
+ $('metrics').innerHTML=[['EMF',fmt(state.emf,1)+' V'],['Terminal voltage',fmt(r.terminal,2)+' V'],['Total resistance',fmt(r.rt,2)+' Ω'],['Supply current',fmt(r.current)+' A'],['Load power',fmt(r.loadPower)+' W'],['Battery loss',fmt(r.batteryLoss)+' W'],['Wire loss',fmt(r.wireLoss)+' W'],['Efficiency',r.inputPower===0?'—':fmt(r.efficiency,1)+'%']].map(([label,value])=>`<div class="metric"><small>${label}</small><b>${value}</b></div>`).join('');
+ for(const l of r.loads){const b=$('badge-'+l.id);b.textContent=l.status;b.className='badge '+(l.status==='ONLINE'?'good':l.status==='LIMITED'?'warn':'bad');$('i-'+l.id).textContent=fmt(l.current)+' A';$('v-'+l.id).textContent=fmt(l.voltage,2)+' V';$('p-'+l.id).textContent=fmt(l.power)+' W';$('bar-'+l.id).style.width=Math.min(100,Math.max(0,Number.isFinite(l.voltage)?100*l.voltage/l.target:0))+'%';}
+ const eq=state.topology==='series'?`R_load = ${r.loads.map(l=>fmt(l.resistance,1)).join(' + ')} = ${fmt(r.req,2)} Ω`:`R_load = 1 / Σ(1/R_branch) = ${fmt(r.req,2)} Ω`;
+ $('equations').innerHTML=[eq,`R_total = r_internal + R_wire + R_load = ${fmt(r.rt,2)} Ω`,`I_supply = ${closed?fmt(state.emf,2)+' / '+fmt(r.rt,2):'0 (breaker open)'} = ${fmt(r.current)} A`,`V_terminal = ${fmt(state.emf,2)} − ${fmt(r.current)} × ${fmt(state.internalR,2)} = ${fmt(r.terminal,3)} V`,...r.loads.map((l,i)=>`R${i+1}: V = ${fmt(l.voltage,3)} V; I = ${fmt(l.current)} A; P = ${fmt(l.power)} W`),`P_source = EMF × I = ${fmt(r.inputPower)} W`,`Power balance: source ${fmt(r.inputPower)} = loads ${fmt(r.loadPower)} + internal ${fmt(r.batteryLoss)} + wires ${fmt(r.wireLoss)} W`,`Efficiency = P_load / P_source × 100 = ${r.inputPower===0?'undefined (no delivered power)':fmt(r.efficiency,2)+'%'}`].map(t=>`<div>${escapeHTML(t)}</div>`).join('');
+ meterOptions();updateMeter();drawCircuit();$('challengeResult').textContent='';
 }
-
-function drawElectrons(){
- $('electrons').innerHTML='';
- if(!closed)return;
- const E=+controls.emf.value,Rt=+controls.internalR.value + +controls.wireR.value + +controls.r1.value + +controls.r2.value + +controls.r3.value,I=E/Rt;
- phase+=0.12+Math.min(I*80,.8);
- for(let i=0;i<28;i++){const p=pointAt(phase+i*totalPath/28),c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',p.x);c.setAttribute('cy',p.y);c.setAttribute('r',7);c.setAttribute('class','electron');$('electrons').appendChild(c)}
+function restore(config){state=copy(config);closed=false;tripped=false;$('challengeResult').textContent='';makeControls();update();}
+function validate(raw){
+ if(!raw||raw.version!==2||!['series','parallel'].includes(raw.topology)||typeof raw.protection!=='boolean')throw Error('Expected an Orion version 2 configuration.');
+ const num=(x,min,max)=>typeof x==='number'&&Number.isFinite(x)&&x>=min&&x<=max;
+ if(!num(raw.emf,.5,48)||!num(raw.internalR,0,100)||!num(raw.wireR,0,100)||!num(raw.tripLimit,.001,100)||!Array.isArray(raw.loads)||raw.loads.length<1||raw.loads.length>6)throw Error('Source values or load count are outside supported limits.');
+ const ids=new Set();const loads=raw.loads.map(l=>{if(!l||typeof l.id!=='string'||!/^[-a-zA-Z0-9_]{1,50}$/.test(l.id)||ids.has(l.id)||l.id==='source'||typeof l.name!=='string'||!l.name.trim()||l.name.length>36||!num(l.r,1,100000)||!num(l.target,.1,100)||!['normal','open','short'].includes(l.fault))throw Error('A load contains invalid values or duplicate identifiers.');ids.add(l.id);return {id:l.id,name:l.name,r:l.r,target:l.target,fault:l.fault};});
+ return {version:2,topology:raw.topology,emf:raw.emf,internalR:raw.internalR,wireR:raw.wireR,protection:raw.protection,tripLimit:raw.tripLimit,loads};
 }
-Object.values(controls).forEach(e=>e.addEventListener('input',update));
-$('breaker').addEventListener('click',()=>{closed=!closed;update()});
-function animate(){drawElectrons();requestAnimationFrame(animate)}update();animate();
+$('sourceControls').addEventListener('input',e=>{const key=e.target.dataset.source;if(!key)return;const value=+e.target.value;if(e.target.value===''||!e.target.checkValidity())return;state[key]=value;$(key+'Number').value=value;$(key+'Range').value=value;update();});
+$('sourceControls').addEventListener('change',e=>{const key=e.target.dataset.source;if(key&&!e.target.checkValidity()){e.target.value=state[key];say('Enter a source value within the displayed limits.');}});
+$('loads').addEventListener('input',e=>{const {load,key}=e.target.dataset;if(!load)return;const l=state.loads.find(l=>l.id===load);if(key==='name'){if(!e.target.value.trim())return;l.name=e.target.value.slice(0,36);}else if(key==='fault')l.fault=e.target.value;else {if(e.target.value===''||!e.target.checkValidity())return;l[key]=+e.target.value;if(key==='r')for(const el of $('loads').querySelectorAll(`[data-load="${load}"][data-key="r"]`)){if(el.type==='range')el.max=Math.max(1500,l.r);el.value=l.r;}}update();});
+$('loads').addEventListener('change',e=>{const {load,key}=e.target.dataset;if(load&&key){const l=state.loads.find(l=>l.id===load);if(e.target.value===''||!e.target.checkValidity()){e.target.value=l[key];say('Enter a value within the displayed limits.');}}});
+$('loads').addEventListener('click',e=>{const id=e.target.dataset.remove;if(id&&state.loads.length>1){state.loads=state.loads.filter(l=>l.id!==id);makeControls();update();}});
+$('addLoad').addEventListener('click',()=>{if(state.loads.length>=6)return;let id;do{id='load'+(++idCounter)}while(state.loads.some(l=>l.id===id));state.loads.push({id,name:'Auxiliary Load',r:500,target:3,fault:'normal'});makeControls();update();});
+$('topology').addEventListener('change',()=>{state.topology=$('topology').value;update();});
+$('breaker').addEventListener('click',()=>{closed=!closed;tripped=false;update();});
+$('protection').addEventListener('change',()=>{state.protection=$('protection').checked;update();});
+$('tripLimit').addEventListener('change',()=>{if(!$('tripLimit').checkValidity()||!$('tripLimit').value){$('tripLimit').value=state.tripLimit;return;}state.tripLimit=+$('tripLimit').value;update();});
+$('reset').addEventListener('click',()=>{restore(defaults);$('preset').value='default';say('Default station restored.');});
+$('applyPreset').addEventListener('click',()=>{const s=copy(defaults),preset=$('preset').value;if(preset==='balanced'){s.emf=12;s.loads[2].r=350;}if(preset==='weak'){s.emf=6;s.internalR=25;}if(preset==='wire')s.wireR=100;if(preset==='overload'){s.topology='parallel';s.loads.forEach(l=>l.r=10);s.tripLimit=.15;}restore(s);say('Scenario loaded. Engage the breaker to run it.');});
+$('save').addEventListener('click',()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));say('Configuration saved in this browser.');}catch(e){say('Browser storage is unavailable. Use Export JSON instead.');}});
+$('load').addEventListener('click',()=>{try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw){say('No saved configuration yet.');return;}restore(validate(JSON.parse(raw)));say('Saved configuration loaded with the breaker open.');}catch(e){say('Could not load: '+e.message);}});
+$('export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='orion-circuit.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);say('Configuration exported.');});
+$('import').addEventListener('click',()=>$('fileInput').click());
+$('fileInput').addEventListener('change',async()=>{const file=$('fileInput').files[0];if(!file)return;try{if(file.size>100000)throw Error('Configuration file is too large.');restore(validate(JSON.parse(await file.text())));say('Configuration imported with the breaker open.');}catch(e){say('Could not import: '+e.message);}finally{$('fileInput').value='';}});
+for(const id of ['meterMode','redProbe','blackProbe','meterComponent'])$(id).addEventListener('change',()=>{updateMeter();drawCircuit();});
+$('pause').addEventListener('click',()=>{paused=!paused;$('pause').textContent=paused?'Resume animation':'Pause animation';});
+const hints={balance:'Adjust the source and load resistances. Each normal load needs at least 85% of its target voltage. Keep wire and internal losses small.',parallel:'Switch to parallel, keep every load normal and online, and limit the supply current to 0.10 A.',fault:'Use parallel mode and set exactly one load to an open fault. Keep at least two loads; all remaining loads must be normal and ONLINE.'};
+function challengeHint(){$('challengeHint').textContent=hints[$('challenge').value];$('challengeResult').textContent='';}
+$('challenge').addEventListener('change',challengeHint);
+$('checkChallenge').addEventListener('click',()=>{const mode=$('challenge').value,normal=result.loads.every(l=>l.fault==='normal'&&l.status==='ONLINE');let pass=closed&&!result.idealShort;if(mode==='balance')pass=pass&&normal&&result.efficiency>=95;if(mode==='parallel')pass=pass&&state.topology==='parallel'&&normal&&result.current<=.1;if(mode==='fault')pass=pass&&state.topology==='parallel'&&state.loads.length>=2&&result.loads.filter(l=>l.fault==='open').length===1&&result.loads.filter(l=>l.fault!=='open').every(l=>l.fault==='normal'&&l.status==='ONLINE');$('challengeResult').textContent=pass?'MISSION COMPLETE — all conditions met.':'Goal not met yet. '+(!closed?'Engage the breaker. ':hints[mode]);$('challengeResult').className='challenge-result '+(pass?'good':'warn');});
+function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.05):0;lastTime=time;if(!paused&&!matchMedia('(prefers-reduced-motion: reduce)').matches)phase+=dt;const sign=$('flow').value==='electron'?-1:1;for(const p of paths){const speed=30+Math.min(p.current*1100,180);for(let i=0;i<p.circles.length;i++){let d=((sign*phase*speed+i*p.length/p.circles.length)%p.length+p.length)%p.length;for(const s of p.segments){if(d<=s.length){const t=d/s.length;p.circles[i].setAttribute('cx',s.a[0]+(s.b[0]-s.a[0])*t);p.circles[i].setAttribute('cy',s.a[1]+(s.b[1]-s.a[1])*t);break;}d-=s.length;}}}requestAnimationFrame(animate);}
+makeControls();update();challengeHint();requestAnimationFrame(animate);
 </script>
 </body>
 </html>
