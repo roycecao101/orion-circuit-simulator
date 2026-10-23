@@ -6,19 +6,43 @@
 <style>
 :root{color-scheme:dark;--bg:#07111f;--panel:#0f2138;--cyan:#67e8f9;--blue:#38bdf8;--text:#e6f4ff;--muted:#94a3b8;--line:rgba(103,232,249,.2)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 10%,#13355270,transparent 40%),linear-gradient(#020817,#07111f);color:var(--text);font-family:system-ui,Arial,sans-serif;min-height:100vh}header{padding:28px 20px;border-bottom:1px solid var(--line)}.header-inner{max-width:1340px;margin:auto}h1{margin:5px 0;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:.07em}p{line-height:1.5}.eyebrow{color:var(--cyan);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase}header p{margin:8px 0;color:var(--muted)}main{max-width:1380px;margin:20px auto;padding:0 20px 40px}.toolbar,.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.toolbar{margin-bottom:18px}.toolbar select{min-width:160px}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(340px,1fr);gap:18px;align-items:start}.card{background:linear-gradient(180deg,#0f2138ee,#06111fee);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 16px 45px #0003;min-width:0}.card h2{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin:0;padding:16px;border-bottom:1px solid var(--line);color:#bae6fd}.pad{padding:16px}.sim{margin:14px;border:1px solid var(--line);border-radius:12px;background:#06111f;overflow:hidden}svg{display:block;width:100%;height:auto}.wire{stroke:#67e8f9;stroke-width:3;fill:none;stroke-linejoin:round}.component{stroke:#e6f4ff;stroke-width:3;fill:#0f2138}.node{fill:#e0f2fe;stroke:#0ea5e9;stroke-width:2;cursor:pointer}.node:hover{fill:#facc15}.node-label{fill:#94a3b8;font-size:11px}.svg-label{fill:#e6f4ff;font:600 13px system-ui}.svg-small{fill:#94a3b8;font:11px system-ui}.particle{fill:#67e8f9}.muted,small{color:var(--muted)}.muted{font-size:.84rem;line-height:1.5}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:0 14px 14px}.metric{background:#02081780;border:1px solid var(--line);border-radius:10px;padding:12px 6px;text-align:center}.metric small{font-size:.72rem;display:block}.metric b{display:block;margin-top:6px;font-variant-numeric:tabular-nums;font-size:.94rem}.control{padding:12px;background:#02081760;border:1px solid #94a3b822;border-radius:10px;margin-bottom:10px}.control label{font-size:.85rem;font-weight:600}.control .row{justify-content:space-between;flex-wrap:nowrap}.control input[type=number]{width:94px}input[type=range]{width:100%;accent-color:#38bdf8;margin-top:12px}input,select,button{font:inherit}input[type=number],input[type=text],select{background:#081426;border:1px solid #40617a;border-radius:7px;color:var(--text);padding:8px;max-width:100%}button{padding:10px 14px;border:1px solid #3c637d;border-radius:8px;background:#132d46;color:var(--text);cursor:pointer;font-size:.85rem;font-weight:600}button:hover{background:#214663}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid #67e8f9;outline-offset:3px}button:disabled{opacity:.4;cursor:default}.primary{background:#0e7490;border-color:#22d3ee}.primary:hover{background:#0891b2}.danger{background:#7f1d1d;border-color:#ef4444}.good{color:#86efac}.warn{color:#fde047}.bad{color:#fca5a5}.badge{font-size:.7rem;font-weight:700;border:1px solid currentColor;border-radius:999px;padding:3px 7px}.status{padding:0 16px 14px;display:flex;justify-content:space-between;gap:10px;align-items:center}.load{border:1px solid #94a3b833;border-radius:10px;padding:12px;margin-bottom:10px;background:#02081750}.load-header{display:flex;justify-content:space-between;align-items:center;gap:6px}.load-title{font-weight:700}.load .row{margin-top:10px}.load input[type=text]{width:100%;margin-top:10px}.load .readings{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;text-align:center}.readings div{background:#081426;padding:7px;border-radius:6px}.readings small{display:block;font-size:.65rem}.readings b{font-size:.8rem}.load-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.load-controls label{font-size:.7rem;color:var(--muted)}.load-controls input,.load-controls select{width:100%;margin-top:4px}.bar{height:6px;background:#1e293b;border-radius:6px;overflow:hidden;margin-top:10px}.fill{height:100%;background:#22d3ee}.lower{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.equations{font: .85rem/1.9 ui-monospace,monospace;overflow-wrap:anywhere}.meter-display{font:600 1.5rem ui-monospace,monospace;color:#67e8f9;padding:16px;background:#020817;margin:12px 0;border-radius:8px}.meter-fields{display:flex;gap:10px;flex-wrap:wrap}.meter-fields label{font-size:.8rem;flex:1;min-width:120px}.meter-fields select{display:block;width:100%;margin-top:6px}.note{margin-top:18px;border:1px solid var(--line);border-radius:12px;padding:16px;background:#0e749014;font-size:.85rem;line-height:1.6}.notice{min-height:24px;color:#67e8f9;font-size:.85rem;margin-bottom:10px}summary{cursor:pointer;font-size:.85rem;padding:12px 16px;background:#02081744}details{border-top:1px solid var(--line)}.challenge-result{margin-top:12px;font-weight:600;font-size:.85rem}.wide{width:100%}.flow-controls{padding:0 16px 14px}.flow-controls label{font-size:.8rem}.hint{font-size:.75rem;color:#94a3b8;margin-top:8px}.refs{margin-top:12px;color:#94a3b8;font-size:.75rem;line-height:1.6}@media(max-width:1050px){.layout{grid-template-columns:1fr}.lower{grid-template-columns:1fr 1fr}}@media(max-width:600px){.sim{overflow-x:auto}.sim svg{min-width:640px}main{padding:0 10px}.metrics{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}.toolbar>*{flex:1}.toolbar button{white-space:nowrap}.status{align-items:flex-start;flex-direction:column}header{padding:20px 14px}}
+
+.energy-lab{margin-top:18px}.lab-toolbar{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}.lab-toolbar label{flex:1;min-width:180px;font-size:.8rem;color:var(--muted)}.lab-toolbar select,.lab-toolbar input{display:block;width:100%;margin-top:7px}.lab-bank-grid,.lab-output-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.lab-connect{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:.8rem}.lab-connect select{flex:1}.energy-component{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}.energy-component .row{flex-wrap:wrap;justify-content:flex-start;gap:8px}.energy-component label{min-width:65px}.energy-component input{width:125px}.energy-component .hint{font-variant-numeric:tabular-nums;min-height:18px}.lab-output-grid>div,.lab-bank-grid>section{min-width:0}.lab-run{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 12px}.lab-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.lab-chart{border:1px solid var(--line);border-radius:10px;background:#06111f;margin-bottom:12px}.lab-formula{font-size:.75rem;padding:12px 0;line-height:1.8}.lab-output-grid{margin:18px 0}.energy-lab details{margin-top:12px}@media(max-width:760px){.lab-bank-grid,.lab-output-grid{grid-template-columns:1fr}.lab-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-toolbar label{min-width:100%}}@media(max-width:600px){.energy-lab .sim svg{min-width:540px}}
+
+[hidden]{display:none!important}.bench-intro{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:20px}.bench-intro p{color:var(--muted);font-size:.9rem;line-height:1.6}.bench-actions,.bench-tabs{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.bench-actions{padding:12px 0}.bench-tabs{margin-top:10px}.bench-tabs button[aria-pressed=true]{background:#0e7490;border-color:#67e8f9}.device-grid{display:grid;grid-template-columns:1fr;gap:20px}.device-card{border:1px solid var(--line);border-radius:12px;padding:18px;background:#06111f;min-width:0}.device-card h3{margin:6px 0 0;font-size:1.1rem}.device-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.device-controls label{font-size:.78rem;color:var(--muted)}.device-controls input,.device-controls select{display:block;width:100%;margin-top:7px}.device-result-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:20px 0 14px}.device-visuals{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}.device-visuals>*{min-width:0}.device-schematic{border:1px solid var(--line);border-radius:10px;overflow:auto}.device-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.device-empty{padding:30px;text-align:center;border:1px dashed #40617a;border-radius:12px}.device-card details{margin-top:8px}.device-card .lab-formula{margin-bottom:0}@media(max-width:760px){.device-visuals{grid-template-columns:1fr}.device-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.device-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.bench-actions select{max-width:100%}.bench-tabs button{flex:1}.device-card{padding:12px}}@media(max-width:440px){.device-controls{grid-template-columns:1fr}.device-schematic svg{min-width:520px}}
 </style>
 </head>
 <body>
 <header><div class="header-inner"><span class="eyebrow">Interactive circuit lab · Orion</span><h1>Orion Station Power Grid</h1><p>Build a load network, measure its behavior, and keep the station online.</p></div></header>
 <main>
-<div class="toolbar"><label for="topology">Circuit</label><select id="topology"><option value="series">Series</option><option value="parallel">Parallel</option></select><label for="preset">Scenario</label><select id="preset"><option value="default">Default station</option><option value="balanced">Balanced systems</option><option value="weak">Weak battery</option><option value="wire">High wire resistance</option><option value="overload">Overload demo</option></select><button id="applyPreset">Apply scenario</button><button id="reset">Reset</button><button id="save">Save</button><button id="load">Load</button><button id="export">Export JSON</button><button id="import">Import JSON</button><input hidden id="fileInput" type="file" accept=".json,application/json"></div>
+<div class="toolbar"><label for="topology">Circuit</label><select id="topology"><option value="series">Series</option><option value="parallel">Parallel</option></select><label for="preset">Scenario</label><select id="preset"><option value="default">Default station</option><option value="balanced">Balanced systems</option><option value="weak">Weak battery</option><option value="wire">High wire resistance</option><option value="overload">Overload demo</option></select><button id="applyPreset">Apply scenario</button><button id="reset">Reset</button><button id="openEnergyLab">Experimental workbench ↓</button><button id="save">Save</button><button id="load">Load</button><button id="export">Export JSON</button><button id="import">Import JSON</button><input hidden id="fileInput" type="file" accept=".json,application/json"></div>
 <div id="notice" class="notice" role="status" aria-live="polite"></div>
 <div class="layout">
 <section class="card"><h2>Station circuit</h2><div class="sim"><svg id="circuit" viewBox="0 0 800 420" role="img" aria-label="Circuit diagram"><g id="drawing"></g><g id="particles" aria-hidden="true"></g></svg></div><div class="status"><strong id="banner">POWER OFFLINE</strong><span id="topologyHint" class="muted"></span></div><div class="metrics" id="metrics"></div><div class="flow-controls row"><label for="flow">Flow display</label><select id="flow"><option value="conventional">Conventional current</option><option value="electron">Electron flow (opposite)</option></select><button id="pause">Pause animation</button></div><details open><summary>Virtual multimeter</summary><div class="pad"><div class="meter-fields"><label>Measurement<select id="meterMode"><option value="voltage">Voltage between nodes</option><option value="current">Current through component</option></select></label><label id="redField">Red probe<select id="redProbe"></select></label><label id="blackField">Black probe<select id="blackProbe"></select></label><label id="componentField" hidden>Component<select id="meterComponent"></select></label></div><div id="meterValue" class="meter-display">0.000 V</div><p class="muted" id="meterHelp">Click labeled circuit nodes to alternate red and black probes. Readings assume an ideal meter.</p></div></details><details open><summary>Worked calculations</summary><div class="pad equations" id="equations"></div></details></section>
 <aside class="card"><h2>Mission controls</h2><div class="pad"><div id="sourceControls"></div><div class="control"><div class="row"><label for="protection">Overcurrent protection</label><input type="checkbox" id="protection" checked></div><div class="row" style="margin-top:8px"><label for="tripLimit">Trip threshold (A)</label><input id="tripLimit" type="number" required min="0.001" max="100" step="0.01" value="0.15"></div><p class="hint">A tripped breaker stays open until you re-engage it.</p></div><button id="breaker" class="primary wide">Engage main breaker</button><p id="breakerReason" class="hint" aria-live="polite"></p></div><h2>Load editor & subsystem telemetry</h2><div class="pad"><p class="muted" style="margin-top:0">Add up to six resistive loads. Topology determines how they connect. Set faults and target voltages per load.</p><div id="loads"></div><button id="addLoad" class="wide">+ Add resistive load</button></div></aside>
 </div>
+<section class="card energy-lab" id="energyLab" aria-labelledby="energyHeading">
+<h2 id="energyHeading">Experimental workbench</h2>
+<div class="pad"><div class="bench-intro"><span class="eyebrow">Choose · adjust · observe</span><p>Build a set of experiments to explore energy storage, amplification, switching, and AC voltage conversion. Each card is its own test circuit, with its own controls and readings.</p><div class="bench-actions"><label for="experimentType">Add an experiment</label><select id="experimentType"><option value="opamp">Operational amplifier</option><option value="transistor">NPN transistor</option><option value="transformer">Transformer</option></select><button id="addExperiment" class="primary">+ Add experiment</button><span id="experimentCount" class="muted"></span></div><div class="bench-tabs" role="group" aria-label="Workbench sections"><button id="showStorage" aria-pressed="true">Capacitors &amp; inductors</button><button id="showDevices" aria-pressed="false">Amplifiers, transistors &amp; transformers</button></div><p class="hint">Use the top toolbar’s Save/Load or JSON buttons to keep all experiment settings. Experiments run independently of the station’s main breaker and meter. These are simplified teaching models with preset connections.</p></div>
+<div id="storageExperiments"><h3>Capacitors &amp; inductors · RC/RL lab</h3>
+<p class="muted" style="margin-top:0">Add energy-storage components and explore their response to a DC step. This is a separate RC or RL test circuit powered by the Reactor EMF setting; it does not change the station’s resistive loads, breaker, multimeter, or challenges.</p>
+<div class="lab-toolbar">
+<label>Experiment<select id="energyMode"><option value="rc">RC · capacitor charging</option><option value="rl">RL · inductor current</option></select></label>
+<label>Series test resistor (Ω)<input id="energyResistance" type="number" required min="1" max="100000" step="any" value="470"></label>
+<label>Playback speed<select id="energySpeed"><option value="0.25">0.25 τ / second</option><option value="0.5" selected>0.5 τ / second</option><option value="1">1 τ / second</option><option value="2">2 τ / second</option></select></label>
+</div>
+<div class="lab-bank-grid">
+<section class="control"><div class="load-header"><strong>Capacitor bank</strong><button id="addCapacitor">+ Add capacitor</button></div><label class="lab-connect">Connect capacitors<select id="capacitorConnection"><option value="parallel">Parallel · capacitances add</option><option value="series">Series · reciprocal sum</option></select></label><div id="capacitorList" class="energy-components"></div></section>
+<section class="control"><div class="load-header"><strong>Inductor bank</strong><button id="addInductor">+ Add inductor</button></div><label class="lab-connect">Connect inductors<select id="inductorConnection"><option value="series">Series · inductances add</option><option value="parallel">Parallel · reciprocal sum</option></select></label><div id="inductorList" class="energy-components"></div></section>
+</div>
+<div class="lab-run"><button id="energyRun" class="primary">Start transient</button><button id="energyStep">Step +0.25τ</button><button id="energySwitch">Source OFF · discharge</button><button id="energyReset">Reset transient</button><span id="energyStatus" class="muted" role="status" aria-live="polite"></span></div>
+<p class="hint">Source OFF keeps a closed discharge/decay loop. Playback is scaled by the time constant so fast electrical responses remain visible. Each run covers 5τ (about 99.3% of the transition). Changing circuit values resets the experiment to zero stored energy.</p>
+<div class="lab-output-grid"><div><div class="sim" style="margin:0 0 12px"><svg id="energyCircuit" viewBox="0 0 640 250" role="img" aria-label="RC or RL test circuit"></svg></div><p class="hint">On small screens, scroll the test circuit diagram sideways to see the whole loop.</p><div id="energyMetrics" class="lab-metrics"></div><div id="energyFormula" class="equations lab-formula"></div></div><div><svg id="energyVoltagePlot" class="lab-chart" viewBox="0 0 600 220" role="img" aria-label="Storage bank voltage versus time"></svg><svg id="energyCurrentPlot" class="lab-chart" viewBox="0 0 600 220" role="img" aria-label="Storage bank current versus time"></svg><p class="hint">Curves show the active bank’s response from the most recent source switch. The vertical marker shows the current time; C/L telemetry below each component shows its share of voltage, current, and energy.</p></div></div>
+<details><summary>How this circuit works</summary><div class="muted pad">In RC mode, the selected capacitor bank connects in series with the test resistor. In RL mode, the selected inductor bank connects in series with it. Total resistance includes the test resistor, source internal resistance, and wire resistance. Capacitors store energy in an electric field; inductors store energy in a magnetic field. Capacitor voltage and inductor current remain continuous when the source switches. Inductors are ideal and uncoupled; there is no mutual inductance. The two banks are tested independently, so this section does not model a mixed RLC network. Initial voltages and currents are zero. Save/Load and JSON export/import include both banks and their connection settings; playback position is not saved.</div></details>
+</div><div id="deviceExperiments" hidden><div id="deviceEmpty" class="device-empty"><h3>Your experiment bench is ready</h3><p class="muted">Choose an operational amplifier, transistor, or transformer above and click “Add experiment.” Add several cards to compare different settings.</p></div><div id="experimentCards" class="device-grid"></div></div></div></section>
+
 <div class="lower"><section class="card"><h2>Mission challenges</h2><div class="pad"><label for="challenge" class="muted">Choose a goal</label><select id="challenge" class="wide" style="margin-top:8px"><option value="balance">Keep every subsystem ONLINE at ≥95% efficiency</option><option value="parallel">Build a parallel network with total current ≤0.10 A and all loads ONLINE</option><option value="fault">Isolate a failed branch: one open fault, other branches ONLINE</option></select><p id="challengeHint" class="muted"></p><button id="checkChallenge">Check mission</button><div id="challengeResult" class="challenge-result" role="status" aria-live="polite"></div></div></section><section class="card"><h2>Experiment guide</h2><div class="pad"><p class="muted">In series, every load carries the same current and shares the available voltage. In parallel, loads share a voltage and their currents add at the supply.</p><p class="muted">Try opening one load in each topology. Then raise wire resistance and watch the terminal voltage, load voltage, and efficiency change.</p><p class="muted">ONLINE ≥85% of target · LIMITED ≥55% · CRITICAL &lt;55%. Targets are teaching thresholds, not device ratings. Shorted loads receive zero voltage.</p><p class="muted">Save keeps a manual snapshot in this browser. Export downloads a portable JSON configuration.</p></div></section></div>
-<section class="note"><strong>Physics model:</strong> An ideal DC voltage source has series internal resistance and shared supply/return wire resistance. Loads are ideal resistors in a series chain or parallel branches. Open faults have infinite resistance; short faults have zero resistance. This editor supports these two network layouts, not arbitrary wiring. Animated markers illustrate flow direction and relative current, not physical electron speed. A zero-resistance path with an ideal source is reported as an ideal short circuit.</section>
+<section class="note"><strong>Physics model:</strong> An ideal DC voltage source has series internal resistance and shared supply/return wire resistance. Loads are ideal resistors in a series chain or parallel branches. Open faults have infinite resistance; short faults have zero resistance. The station editor supports these two network layouts, not arbitrary wiring. The experimental workbench includes independent first-order RC/RL circuits, rail-limited ideal op-amps, piecewise NPN transistors, and ideal AC transformers. Each card explains its assumptions. Animated markers illustrate flow direction and relative current, not physical electron speed. A zero-resistance path with an ideal source is reported as an ideal short circuit.</section>
 <div class="refs">References: Halliday, Resnick & Walker, <em>Fundamentals of Physics</em>, 12th ed. (2021); Serway & Jewett, <em>Physics for Scientists and Engineers</em>, 10th ed. (2019). DC circuits, Ohm’s law, internal resistance, and electrical power.</div>
 </main>
 <script>
@@ -26,6 +50,8 @@
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',STORAGE_KEY='orion-circuit-v2';
 const copy=o=>JSON.parse(JSON.stringify(o));
 const defaults={version:2,topology:'series',emf:12,internalR:1,wireR:.4,protection:true,tripLimit:.15,loads:[{id:'life',name:'Life Support',r:420,target:4,fault:'normal'},{id:'comms',name:'Communications',r:300,target:3,fault:'normal'},{id:'engine',name:'Engine Grid',r:250,target:3.5,fault:'normal'}]};
+defaults.energyLab=defaultEnergyLab();
+defaults.workbench=defaultWorkbench();
 let state=copy(defaults),closed=false,tripped=false,result,paths=[],phase=0,lastTime=0,paused=false,nextProbe='red',idCounter=0;
 const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=(n,d=4)=>Number.isFinite(n)?n.toFixed(d):n===Infinity?'∞':'—';
@@ -130,15 +156,15 @@ function update(){
  for(const l of r.loads){const b=$('badge-'+l.id);b.textContent=l.status;b.className='badge '+(l.status==='ONLINE'?'good':l.status==='LIMITED'?'warn':'bad');$('i-'+l.id).textContent=fmt(l.current)+' A';$('v-'+l.id).textContent=fmt(l.voltage,2)+' V';$('p-'+l.id).textContent=fmt(l.power)+' W';$('bar-'+l.id).style.width=Math.min(100,Math.max(0,Number.isFinite(l.voltage)?100*l.voltage/l.target:0))+'%';}
  const eq=state.topology==='series'?`R_load = ${r.loads.map(l=>fmt(l.resistance,1)).join(' + ')} = ${fmt(r.req,2)} Ω`:`R_load = 1 / Σ(1/R_branch) = ${fmt(r.req,2)} Ω`;
  $('equations').innerHTML=[eq,`R_total = r_internal + R_wire + R_load = ${fmt(r.rt,2)} Ω`,`I_supply = ${closed?fmt(state.emf,2)+' / '+fmt(r.rt,2):'0 (breaker open)'} = ${fmt(r.current)} A`,`V_terminal = ${fmt(state.emf,2)} − ${fmt(r.current)} × ${fmt(state.internalR,2)} = ${fmt(r.terminal,3)} V`,...r.loads.map((l,i)=>`R${i+1}: V = ${fmt(l.voltage,3)} V; I = ${fmt(l.current)} A; P = ${fmt(l.power)} W`),`P_source = EMF × I = ${fmt(r.inputPower)} W`,`Power balance: source ${fmt(r.inputPower)} = loads ${fmt(r.loadPower)} + internal ${fmt(r.batteryLoss)} + wires ${fmt(r.wireLoss)} W`,`Efficiency = P_load / P_source × 100 = ${r.inputPower===0?'undefined (no delivered power)':fmt(r.efficiency,2)+'%'}`].map(t=>`<div>${escapeHTML(t)}</div>`).join('');
- meterOptions();updateMeter();drawCircuit();$('challengeResult').textContent='';
+ meterOptions();updateMeter();drawCircuit();$('challengeResult').textContent='';syncEnergyLab();
 }
-function restore(config){state=copy(config);closed=false;tripped=false;$('challengeResult').textContent='';makeControls();update();}
+function restore(config){state=copy(config);closed=false;tripped=false;$('challengeResult').textContent='';makeControls();update();syncEnergyLab(true);syncWorkbench();}
 function validate(raw){
  if(!raw||raw.version!==2||!['series','parallel'].includes(raw.topology)||typeof raw.protection!=='boolean')throw Error('Expected an Orion version 2 configuration.');
  const num=(x,min,max)=>typeof x==='number'&&Number.isFinite(x)&&x>=min&&x<=max;
  if(!num(raw.emf,.5,48)||!num(raw.internalR,0,100)||!num(raw.wireR,0,100)||!num(raw.tripLimit,.001,100)||!Array.isArray(raw.loads)||raw.loads.length<1||raw.loads.length>6)throw Error('Source values or load count are outside supported limits.');
  const ids=new Set();const loads=raw.loads.map(l=>{if(!l||typeof l.id!=='string'||!/^[-a-zA-Z0-9_]{1,50}$/.test(l.id)||ids.has(l.id)||l.id==='source'||typeof l.name!=='string'||!l.name.trim()||l.name.length>36||!num(l.r,1,100000)||!num(l.target,.1,100)||!['normal','open','short'].includes(l.fault))throw Error('A load contains invalid values or duplicate identifiers.');ids.add(l.id);return {id:l.id,name:l.name,r:l.r,target:l.target,fault:l.fault};});
- return {version:2,topology:raw.topology,emf:raw.emf,internalR:raw.internalR,wireR:raw.wireR,protection:raw.protection,tripLimit:raw.tripLimit,loads};
+ return {version:2,topology:raw.topology,emf:raw.emf,internalR:raw.internalR,wireR:raw.wireR,protection:raw.protection,tripLimit:raw.tripLimit,loads,energyLab:validateEnergyLab(raw.energyLab),workbench:validateWorkbench(raw.workbench)};
 }
 $('sourceControls').addEventListener('input',e=>{const key=e.target.dataset.source;if(!key)return;const value=+e.target.value;if(e.target.value===''||!e.target.checkValidity())return;state[key]=value;$(key+'Number').value=value;$(key+'Range').value=value;update();});
 $('sourceControls').addEventListener('change',e=>{const key=e.target.dataset.source;if(key&&!e.target.checkValidity()){e.target.value=state[key];say('Enter a source value within the displayed limits.');}});
@@ -164,7 +190,208 @@ function challengeHint(){$('challengeHint').textContent=hints[$('challenge').val
 $('challenge').addEventListener('change',challengeHint);
 $('checkChallenge').addEventListener('click',()=>{const mode=$('challenge').value,normal=result.loads.every(l=>l.fault==='normal'&&l.status==='ONLINE');let pass=closed&&!result.idealShort;if(mode==='balance')pass=pass&&normal&&result.efficiency>=95;if(mode==='parallel')pass=pass&&state.topology==='parallel'&&normal&&result.current<=.1;if(mode==='fault')pass=pass&&state.topology==='parallel'&&state.loads.length>=2&&result.loads.filter(l=>l.fault==='open').length===1&&result.loads.filter(l=>l.fault!=='open').every(l=>l.fault==='normal'&&l.status==='ONLINE');$('challengeResult').textContent=pass?'MISSION COMPLETE — all conditions met.':'Goal not met yet. '+(!closed?'Engage the breaker. ':hints[mode]);$('challengeResult').className='challenge-result '+(pass?'good':'warn');});
 function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.05):0;lastTime=time;if(!paused&&!matchMedia('(prefers-reduced-motion: reduce)').matches)phase+=dt;const sign=$('flow').value==='electron'?-1:1;for(const p of paths){const speed=30+Math.min(p.current*1100,180);for(let i=0;i<p.circles.length;i++){let d=((sign*phase*speed+i*p.length/p.circles.length)%p.length+p.length)%p.length;for(const s of p.segments){if(d<=s.length){const t=d/s.length;p.circles[i].setAttribute('cx',s.a[0]+(s.b[0]-s.a[0])*t);p.circles[i].setAttribute('cy',s.a[1]+(s.b[1]-s.a[1])*t);break;}d-=s.length;}}}requestAnimationFrame(animate);}
-makeControls();update();challengeHint();requestAnimationFrame(animate);
+// First-order RC/RL lab. Analytical step responses avoid timestep instability.
+const energyRuntime={running:false,sourceOn:true,initial:0,q:0,key:'',lastFrame:0};
+function defaultEnergyLab(){return {mode:'rc',resistance:470,capacitorConnection:'parallel',inductorConnection:'series',capacitors:[100],inductors:[100]};}
+function validateEnergyLab(raw){
+ if(raw===undefined)return defaultEnergyLab();
+ if(!raw||!['rc','rl'].includes(raw.mode)||typeof raw.resistance!=='number'||!Number.isFinite(raw.resistance)||raw.resistance<1||raw.resistance>100000)throw Error('Invalid RC/RL experiment settings.');
+ for(const key of ['capacitorConnection','inductorConnection'])if(!['series','parallel'].includes(raw[key]))throw Error('Invalid energy-storage connection.');
+ for(const key of ['capacitors','inductors'])if(!Array.isArray(raw[key])||raw[key].length>6||raw[key].some(v=>typeof v!=='number'||!Number.isFinite(v)||v<.001||v>1000000))throw Error('Use up to six capacitors/inductors with values from 0.001 to 1,000,000.');
+ return {mode:raw.mode,resistance:raw.resistance,capacitorConnection:raw.capacitorConnection,inductorConnection:raw.inductorConnection,capacitors:[...raw.capacitors],inductors:[...raw.inductors]};
+}
+function equivalentStorage(values,kind,connection){
+ if(!values.length)return 0;
+ const si=values.map(v=>v*(kind==='capacitor'?1e-6:1e-3));
+ const add=kind==='capacitor'?connection==='parallel':connection==='series';
+ return add?si.reduce((a,b)=>a+b,0):1/si.reduce((a,b)=>a+1/b,0);
+}
+function energyParameters(s=state){
+ const lab=s.energyLab,rc=lab.mode==='rc',kind=rc?'capacitor':'inductor';
+ const equivalent=equivalentStorage(rc?lab.capacitors:lab.inductors,kind,rc?lab.capacitorConnection:lab.inductorConnection);
+ const resistance=lab.resistance+s.internalR+s.wireR;
+ return {rc,kind,equivalent,resistance,emf:s.emf,tau:equivalent?(rc?resistance*equivalent:equivalent/resistance):0};
+}
+function energyResponse(p,initial,sourceOn,q){
+ if(!p.equivalent)return {value:0,voltage:0,current:0,energy:0,target:0};
+ const target=sourceOn?(p.rc?p.emf:p.emf/p.resistance):0;
+ const value=target+(initial-target)*Math.exp(-Math.max(0,q));
+ const voltage=p.rc?value:(sourceOn?p.emf:0)-value*p.resistance;
+ const current=p.rc?((sourceOn?p.emf:0)-value)/p.resistance:value;
+ return {value,voltage,current,energy:.5*p.equivalent*value*value,target};
+}
+function labNumber(n){if(n===0)return '0';return Math.abs(n)<.001||Math.abs(n)>=10000?n.toExponential(3):Number(n.toPrecision(5)).toString();}
+function energyKey(){return JSON.stringify([state.emf,state.internalR,state.wireR,state.energyLab]);}
+function resetEnergyRuntime(){energyRuntime.running=false;energyRuntime.sourceOn=true;energyRuntime.initial=0;energyRuntime.q=0;energyRuntime.lastFrame=0;}
+function syncEnergyLab(force=false){
+ const key=energyKey();if(!force&&energyRuntime.key===key)return;
+ energyRuntime.key=key;resetEnergyRuntime();buildEnergyControls();renderEnergy();
+}
+function buildEnergyControls(){
+ const lab=state.energyLab;$('energyMode').value=lab.mode;$('energyResistance').value=lab.resistance;
+ for(const kind of ['capacitor','inductor']){
+  const key=kind+'s',values=lab[key],prefix=kind==='capacitor'?'C':'L',unit=kind==='capacitor'?'µF':'mH';
+  $(kind+'Connection').value=lab[kind+'Connection'];$('add'+(kind==='capacitor'?'Capacitor':'Inductor')).disabled=values.length>=6;
+  $(kind+'List').innerHTML=values.length?values.map((v,i)=>`<div class="energy-component"><div class="row"><label for="${kind}Value${i}">${prefix}${i+1} (${unit})</label><input id="${kind}Value${i}" type="number" required min="0.001" max="1000000" step="any" value="${v}" data-energy-kind="${kind}" data-energy-index="${i}"><button data-energy-remove="${kind}" data-energy-index="${i}" aria-label="Remove ${prefix}${i+1}">Remove</button></div><div id="${kind}Reading${i}" class="hint"></div></div>`).join(''):'<p class="muted">No components yet. Add one to run this experiment.</p>';
+ }
+}
+function drawEnergyCircuit(p){
+ const svg=$('energyCircuit');svg.replaceChildren();
+ const add=(tag,a,t)=>{const e=elem(tag,a,t);svg.append(e);return e;};
+ const wire=(x1,y1,x2,y2)=>add('line',{x1,y1,x2,y2,class:'wire'}),text=(x,y,t)=>add('text',{x,y,class:'svg-small','text-anchor':'middle'},t);
+ wire(80,65,250,65);add('rect',{x:250,y:55,width:100,height:20,rx:3,class:'component'});wire(350,65,520,65);wire(520,65,520,112);wire(520,158,520,205);wire(520,205,80,205);wire(80,205,80,160);wire(80,110,80,65);
+ add('circle',{cx:80,cy:135,r:25,class:'component'});text(80,139,energyRuntime.sourceOn?state.emf+' V':'0 V');
+ text(300,43,`R total = ${labNumber(p.resistance)} Ω`);text(300,94,`test ${state.energyLab.resistance} + internal ${state.internalR} + wire ${state.wireR} Ω`);
+ if(p.rc){add('line',{x1:494,y1:122,x2:546,y2:122,class:'component'});add('line',{x1:494,y1:148,x2:546,y2:148,class:'component'});wire(520,112,520,122);wire(520,148,520,158);}
+ else {add('path',{d:'M520 112 Q490 112 490 120 Q490 128 520 128 Q490 128 490 136 Q490 144 520 144 Q490 144 490 151 Q490 158 520 158',class:'component',style:'fill:none'});}
+ text(402,139,p.rc?'C equivalent':'L equivalent');text(402,158,labNumber(p.equivalent*(p.rc?1e6:1e3))+(p.rc?' µF':' mH'));
+ text(230,230,energyRuntime.sourceOn?'Source ON · energy builds up':'Source OFF · closed decay loop');text(80,87,energyRuntime.sourceOn?'+':'');
+ svg.setAttribute('aria-label',`${p.rc?'RC':'RL'} test circuit with ${p.resistance} ohms total resistance and ${labNumber(p.equivalent)} ${p.rc?'farads':'henries'} equivalent storage`);
+}
+function drawEnergyPlot(id,p,property){
+ const svg=$(id);svg.replaceChildren();
+ const add=(tag,a,t)=>{const e=elem(tag,a,t);svg.append(e);return e;};
+ const current=property==='current',scale=current?p.emf/p.resistance:p.emf,color=current?'#facc15':'#67e8f9';
+ const x=q=>84+q/5*492,y=v=>115-v/scale*65;
+ add('text',{x:18,y:22,class:'svg-label'},current?'Bank current (A)':'Bank voltage (V)');
+ for(const n of [-1,0,1]){const v=n*scale;add('line',{x1:84,y1:y(v),x2:576,y2:y(v),stroke:'#28415b','stroke-width':1});add('text',{x:76,y:y(v)+4,class:'svg-small','text-anchor':'end'},labNumber(v));}
+ for(let q=0;q<=5;q++){add('text',{x:x(q),y:207,class:'svg-small','text-anchor':'middle'},q+'τ');}
+ if(p.equivalent){let d='';for(let k=0;k<=160;k++){const q=k/32,v=energyResponse(p,energyRuntime.initial,energyRuntime.sourceOn,q)[property];d+=(k?' L':'M')+x(q).toFixed(2)+' '+y(v).toFixed(2);}add('path',{d,stroke:color,'stroke-width':2.5,fill:'none'});
+ const r=energyResponse(p,energyRuntime.initial,energyRuntime.sourceOn,energyRuntime.q);add('line',{x1:x(energyRuntime.q),y1:40,x2:x(energyRuntime.q),y2:194,stroke:'#e6f4ff','stroke-dasharray':'4 4'});add('circle',{cx:x(energyRuntime.q),cy:y(r[property]),r:4,fill:color});}
+ svg.setAttribute('aria-label',`${current?'Bank current in amperes':'Bank voltage in volts'} versus time from zero to five time constants`);
+}
+function renderEnergy(){
+ const lab=state.energyLab,p=energyParameters(),r=energyResponse(p,energyRuntime.initial,energyRuntime.sourceOn,energyRuntime.q),valid=p.equivalent>0;
+ $('energyRun').disabled=!valid;$('energyStep').disabled=!valid;$('energySwitch').disabled=!valid;
+ $('energyRun').textContent=energyRuntime.running?'Pause transient':energyRuntime.q>=5?'Replay transient':'Start / resume transient';
+ $('energySwitch').textContent=energyRuntime.sourceOn?(p.rc?'Source OFF · discharge':'Source OFF · current decay'):'Source ON · energize';
+ $('energyStatus').textContent=!valid?'Add a '+p.kind+' to begin.':energyRuntime.running?'Running':energyRuntime.q>=5?'5τ reached · 99.3% of transition complete':energyRuntime.q===0?'Ready · zero elapsed time':'Paused';
+ $('energyMetrics').innerHTML=[['Equivalent '+(p.rc?'capacitance':'inductance'),labNumber(p.equivalent*(p.rc?1e6:1e3))+(p.rc?' µF':' mH')],['Time constant τ',valid?labNumber(p.tau)+' s':'—'],['Elapsed since switch',valid?labNumber(energyRuntime.q*p.tau)+' s':'—'],['Bank voltage',labNumber(r.voltage)+' V'],['Bank current',labNumber(r.current)+' A'],['Stored energy',labNumber(r.energy)+' J']].map(([k,v])=>`<div class="metric"><small>${k}</small><b>${v}</b></div>`).join('');
+ const formula=p.rc?'τ = R_total × C_eq; V_C = V_final + (V_initial − V_final)e^(−t/τ); I = (V_source − V_C) / R_total; W = ½C_eq V_C²':'τ = L_eq / R_total; I_L = I_final + (I_initial − I_final)e^(−t/τ); V_L = V_source − I_L R_total; W = ½L_eq I_L²';
+ $('energyFormula').textContent=formula;
+ for(const kind of ['capacitor','inductor']){
+  const active=(kind==='capacitor')===p.rc;
+  lab[kind+'s'].forEach((value,i)=>{const e=$(kind+'Reading'+i);if(!active||!valid){e.textContent='Select '+(kind==='capacitor'?'RC':'RL')+' mode for component readings.';return;}
+   const si=value*(p.rc?1e-6:1e-3),connection=lab[kind+'Connection'];
+   const voltage=p.rc?(connection==='parallel'?r.voltage:r.voltage*p.equivalent/si):(connection==='series'?r.voltage*si/p.equivalent:r.voltage);
+   const current=p.rc?(connection==='series'?r.current:r.current*si/p.equivalent):(connection==='series'?r.current:r.current*p.equivalent/si);
+   const energy=.5*si*(p.rc?voltage*voltage:current*current);
+   e.textContent=labNumber(voltage)+' V · '+labNumber(current)+' A · '+labNumber(energy)+' J';
+  });
+ }
+ drawEnergyCircuit(p);drawEnergyPlot('energyVoltagePlot',p,'voltage');drawEnergyPlot('energyCurrentPlot',p,'current');
+}
+function advanceEnergy(q){energyRuntime.q=Math.min(5,energyRuntime.q+q);if(energyRuntime.q>=5)energyRuntime.running=false;renderEnergy();}
+function energyFrame(time){
+ if(energyRuntime.running){if(energyRuntime.lastFrame){const dt=Math.min((time-energyRuntime.lastFrame)/1000,.1);advanceEnergy(dt*Number($('energySpeed').value));}energyRuntime.lastFrame=time;}
+ else energyRuntime.lastFrame=0;
+ requestAnimationFrame(energyFrame);
+}
+$('openEnergyLab').addEventListener('click',()=>$('energyLab').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}));
+$('energyMode').addEventListener('change',()=>{state.energyLab.mode=$('energyMode').value;syncEnergyLab();});
+$('energyResistance').addEventListener('change',()=>{const input=$('energyResistance');if(input.value&&input.checkValidity()){state.energyLab.resistance=Number(input.value);syncEnergyLab();}else input.value=state.energyLab.resistance;});
+for(const kind of ['capacitor','inductor']){
+ $(kind+'Connection').addEventListener('change',()=>{state.energyLab[kind+'Connection']=$(kind+'Connection').value;syncEnergyLab();});
+ $('add'+(kind==='capacitor'?'Capacitor':'Inductor')).addEventListener('click',()=>{if(state.energyLab[kind+'s'].length>=6)return;state.energyLab[kind+'s'].push(100);state.energyLab.mode=kind==='capacitor'?'rc':'rl';syncEnergyLab();});
+ $(kind+'List').addEventListener('change',e=>{if(e.target.dataset.energyKind!==kind)return;const i=Number(e.target.dataset.energyIndex);if(e.target.value&&e.target.checkValidity()){state.energyLab[kind+'s'][i]=Number(e.target.value);syncEnergyLab();}else e.target.value=state.energyLab[kind+'s'][i];});
+ $(kind+'List').addEventListener('click',e=>{if(e.target.dataset.energyRemove!==kind)return;state.energyLab[kind+'s'].splice(Number(e.target.dataset.energyIndex),1);syncEnergyLab();});
+}
+$('energyRun').addEventListener('click',()=>{if(energyRuntime.q>=5){resetEnergyRuntime();}energyRuntime.running=!energyRuntime.running;energyRuntime.lastFrame=0;renderEnergy();});
+$('energyStep').addEventListener('click',()=>{energyRuntime.running=false;advanceEnergy(.25);});
+$('energyReset').addEventListener('click',()=>{resetEnergyRuntime();renderEnergy();});
+$('energySwitch').addEventListener('click',()=>{const p=energyParameters();energyRuntime.initial=energyResponse(p,energyRuntime.initial,energyRuntime.sourceOn,energyRuntime.q).value;energyRuntime.sourceOn=!energyRuntime.sourceOn;energyRuntime.q=0;energyRuntime.lastFrame=0;renderEnergy();});
+
+// Device experiments are independent analytical models, persisted with the station configuration.
+const DEVICE_SPECS={
+ opamp:{title:'Operational amplifier',description:'Explore closed-loop gain and rail clipping. Try increasing the input until the output reaches a supply rail.',fields:[['vin','Input voltage (V)',.5,-12,12],['rin','Input / ground resistor (Ω)',1000,100,1000000],['rf','Feedback resistor (Ω)',10000,100,1000000],['rail','Symmetric supply ± (V)',12,1,24],['load','Output load (Ω)',1000,100,1000000]],note:'Ideal op-amp with negative feedback and symmetric supply rails. Zero input current, rail-limited output, and unlimited output-current capability. No bandwidth, slew-rate, offset, or device-specific output-swing model.'},
+ transistor:{title:'NPN transistor',description:'Drive a grounded-emitter transistor through a base resistor. Observe cutoff, active operation, and saturation.',fields:[['drive','Base drive (V)',3.3,0,5],['supply','Collector supply (V)',12,1,48],['rb','Base resistor (Ω)',10000,100,1000000],['rc','Collector resistor (Ω)',1000,10,100000],['beta','Forward current gain β',100,10,500]],note:'Piecewise DC NPN model: V_BE = 0.7 V when conducting and V_CE(sat) = 0.2 V. I_C is limited by the collector resistor. Real junction curves, temperature, leakage, breakdown, and switching delays are not modeled.'},
+ transformer:{title:'Transformer',description:'Change the turns ratio to step an AC voltage up or down. Compare RMS currents and power on both sides.',fields:[['vp','Primary voltage (V RMS)',12,.1,240],['np','Primary turns',100,1,10000],['ns','Secondary turns',200,1,10000],['load','Secondary load (Ω)',100,1,100000],['frequency','AC frequency (Hz)',60,1,1000]],note:'Ideal transformer driven by a sinusoidal AC source into a resistive secondary load. No winding resistance, leakage flux, magnetizing current, core losses, or saturation. RMS power is conserved; this is not a DC transformer model.'}
+};
+function defaultWorkbench(){return {active:'storage',experiments:[]};}
+function newExperiment(type,id){const spec=DEVICE_SPECS[type];return {id,type,...Object.fromEntries(spec.fields.map(([key,label,value])=>[key,value])),...(type==='opamp'?{configuration:'noninverting'}:{})};}
+function validateWorkbench(raw){
+ if(raw===undefined)return defaultWorkbench();
+ if(!raw||!['storage','devices'].includes(raw.active)||!Array.isArray(raw.experiments)||raw.experiments.length>6)throw Error('Invalid workbench configuration.');
+ const ids=new Set(),experiments=raw.experiments.map(e=>{
+  if(!e||typeof e.id!=='string'||!/^exp[0-9]{1,10}$/.test(e.id)||ids.has(e.id)||!Object.hasOwn(DEVICE_SPECS,e.type))throw Error('Invalid or duplicate experiment.');ids.add(e.id);
+  const clean={id:e.id,type:e.type};for(const [key,label,value,min,max] of DEVICE_SPECS[e.type].fields){if(typeof e[key]!=='number'||!Number.isFinite(e[key])||e[key]<min||e[key]>max||(e.type==='transformer'&&['np','ns'].includes(key)&&!Number.isInteger(e[key])))throw Error('Invalid '+label+' in experiment.');clean[key]=e[key];}
+  if(e.type==='opamp'){if(!['inverting','noninverting'].includes(e.configuration))throw Error('Invalid amplifier configuration.');clean.configuration=e.configuration;}return clean;
+ });return {active:raw.active,experiments};
+}
+function calculateDevice(e){
+ if(e.type==='opamp'){
+  const gain=e.configuration==='inverting'?-e.rf/e.rin:1+e.rf/e.rin,ideal=gain*e.vin,vout=Math.max(-e.rail,Math.min(e.rail,ideal));
+  return {gain,ideal,vout,loadCurrent:vout/e.load,power:vout*vout/e.load,status:Math.abs(ideal)>=e.rail?'OUTPUT CLIPPED':'LINEAR OPERATION'};
+ }
+ if(e.type==='transistor'){
+  const ib=Math.max(0,(e.drive-.7)/e.rb),limit=(e.supply-.2)/e.rc,ic=Math.min(e.beta*ib,limit),vce=e.supply-ic*e.rc;
+  return {ib,ic,vce,ie:ib+ic,power:vce*ic+.7*ib,limit,status:ib===0?'CUTOFF':e.beta*ib>=limit?'SATURATION':'FORWARD ACTIVE'};
+ }
+ const ratio=e.ns/e.np,vs=e.vp*ratio,is=vs/e.load,ip=is*ratio;
+ return {ratio,vs,is,ip,power:vs*is,inputPower:e.vp*ip,reflected:e.load/(ratio*ratio),status:ratio>1?'STEP-UP':ratio<1?'STEP-DOWN':'1:1 ISOLATION'};
+}
+function deviceMetrics(e,r){
+ if(e.type==='opamp')return [['Closed-loop gain',labNumber(r.gain)+' V/V'],['Ideal output',labNumber(r.ideal)+' V'],['Actual output',labNumber(r.vout)+' V'],['Load current',labNumber(r.loadCurrent)+' A'],['Load power',labNumber(r.power)+' W'],['Supply rails','±'+e.rail+' V']];
+ if(e.type==='transistor')return [['Base current I_B',labNumber(r.ib)+' A'],['Collector current I_C',labNumber(r.ic)+' A'],['Emitter current I_E',labNumber(r.ie)+' A'],['V_CE',labNumber(r.vce)+' V'],['Transistor power',labNumber(r.power)+' W'],['Collector limit',labNumber(r.limit)+' A']];
+ return [['Turns ratio N_s/N_p',labNumber(r.ratio)],['Secondary voltage',labNumber(r.vs)+' V RMS'],['Primary current',labNumber(r.ip)+' A RMS'],['Secondary current',labNumber(r.is)+' A RMS'],['Input / output power',labNumber(r.power)+' W'],['Reflected load',labNumber(r.reflected)+' Ω']];
+}
+function deviceFormula(e,r){
+ if(e.type==='opamp')return `Gain = ${e.configuration==='inverting'?'−R_f/R_in':'1 + R_f/R_g'} = ${labNumber(r.gain)}; V_out = clamp(gain × V_in, −V_rail, +V_rail); I_load = V_out/R_load.`;
+ if(e.type==='transistor')return 'I_B = max(0, (V_drive − 0.7)/R_B); I_C = min(βI_B, (V_CC − 0.2)/R_C); V_CE = V_CC − I_C R_C; P_Q = V_CE I_C + 0.7 I_B.';
+ return 'V_s/V_p = N_s/N_p; I_p/I_s = N_s/N_p; P_in = P_out = V_s I_s; R_reflected = R_load (N_p/N_s)².';
+}
+function syncWorkbench(){
+ const b=state.workbench,storage=b.active==='storage';$('storageExperiments').hidden=!storage;$('deviceExperiments').hidden=storage;
+ $('showStorage').setAttribute('aria-pressed',storage);$('showDevices').setAttribute('aria-pressed',!storage);
+ if(!storage){energyRuntime.running=false;renderEnergy();}
+ $('experimentCount').textContent=b.experiments.length+' / 6 cards';$('addExperiment').disabled=b.experiments.length>=6;
+ $('experimentCards').innerHTML=b.experiments.map((e,index)=>{
+  const spec=DEVICE_SPECS[e.type];return `<article class="device-card" data-experiment-card="${e.id}"><div class="load-header"><div><span class="eyebrow">Experiment ${index+1}</span><h3>${spec.title}</h3></div><button data-remove-experiment="${e.id}" aria-label="Remove ${spec.title} experiment ${index+1}">Remove</button></div><p class="muted">${spec.description}</p><div class="device-controls">${e.type==='opamp'?`<label>Amplifier configuration<select data-experiment="${e.id}" data-field="configuration"><option value="noninverting" ${e.configuration==='noninverting'?'selected':''}>Non-inverting</option><option value="inverting" ${e.configuration==='inverting'?'selected':''}>Inverting</option></select></label>`:''}${spec.fields.map(([key,label,value,min,max])=>`<label>${label}<input type="number" required step="${e.type==='transformer'&&['np','ns'].includes(key)?'1':'any'}" min="${min}" max="${max}" value="${e[key]}" data-experiment="${e.id}" data-field="${key}"></label>`).join('')}</div><div class="device-result-head"><strong id="deviceStatus-${e.id}"></strong><span class="hint">Updates as you adjust values</span></div><div class="device-visuals"><div class="device-schematic"><svg id="deviceDiagram-${e.id}" viewBox="0 0 640 320" role="img"></svg></div><svg id="devicePlot-${e.id}" class="lab-chart" viewBox="0 0 600 300" role="img"></svg></div><p class="hint">On small screens, scroll the circuit diagram sideways to inspect all connections.</p><div class="device-metrics" id="deviceMetrics-${e.id}"></div><p id="deviceFormula-${e.id}" class="equations lab-formula"></p><details><summary>Model assumptions &amp; what to try</summary><p class="muted pad">${spec.note}</p></details></article>`;
+ }).join('');$('deviceEmpty').hidden=b.experiments.length>0;
+ for(const e of b.experiments)renderDevice(e);
+}
+function renderDevice(e){const r=calculateDevice(e),status=$('deviceStatus-'+e.id);status.textContent=r.status;status.className=r.status==='OUTPUT CLIPPED'||r.status==='SATURATION'?'warn':r.status==='CUTOFF'?'muted':'good';$('deviceMetrics-'+e.id).innerHTML=deviceMetrics(e,r).map(([label,value])=>`<div class="metric"><small>${label}</small><b>${value}</b></div>`).join('');$('deviceFormula-'+e.id).textContent=deviceFormula(e,r);drawDeviceDiagram(e,r);drawDevicePlot(e,r);}
+function drawDeviceDiagram(e,r){
+ const svg=$('deviceDiagram-'+e.id);svg.replaceChildren();svg.setAttribute('aria-label',DEVICE_SPECS[e.type].title+' experiment circuit');
+ const a=(tag,attr,t)=>{const el=elem(tag,attr,t);svg.append(el);return el;};
+ const line=(x1,y1,x2,y2)=>a('line',{x1,y1,x2,y2,class:'wire'}),text=(x,y,t)=>a('text',{x,y,class:'svg-small','text-anchor':'middle'},t),ground=(x,y)=>{line(x,y,x,y+10);for(let i=0;i<3;i++)a('line',{x1:x-12+i*4,y1:y+10+i*5,x2:x+12-i*4,y2:y+10+i*5,class:'component'});};
+ const resistor=(x,y,w,h,label)=>{a('rect',{x,y,width:w,height:h,class:'component',rx:2});text(x+w/2,y-10,label);};
+ if(e.type==='opamp'){
+  const inv=e.configuration==='inverting';
+  a('path',{d:'M280 90 L280 230 L410 160 Z',class:'component'});text(295,133,inv?'−':'+');text(295,193,inv?'+':'−');line(410,160,550,160);text(510,140,'Vout '+labNumber(r.vout)+' V');
+  if(inv){line(450,160,450,60);line(450,60,360,60);resistor(300,50,60,20,'Rf '+e.rf+' Ω');line(300,60,230,60);line(230,60,230,130);line(230,130,280,130);line(35,130,100,130);resistor(100,120,90,20,'Rin '+e.rin+' Ω');line(190,130,230,130);line(280,190,230,190);line(230,190,230,270);ground(230,270);text(46,112,'Vin '+e.vin+' V');}
+  else {line(450,160,450,260);line(450,260,360,260);resistor(300,250,60,20,'Rf '+e.rf+' Ω');line(300,260,230,260);line(230,260,230,190);line(230,190,280,190);line(35,130,280,130);text(74,111,'Vin '+e.vin+' V');line(230,190,190,190);line(190,190,190,205);resistor(180,205,20,40,'Rg');line(190,245,190,270);ground(190,270);text(147,241,e.rin+' Ω');}
+  line(340,122,340,88);text(381,88,'+'+e.rail+' V');line(340,198,340,220);text(381,220,'−'+e.rail+' V');line(510,160,510,210);resistor(500,210,20,40,'Rload');line(510,250,510,270);ground(510,270);text(570,241,e.load+' Ω');
+ }else if(e.type==='transistor'){
+  line(320,40,320,65);resistor(310,65,20,45,'Rc '+e.rc+' Ω');line(320,110,320,150);text(384,42,'Vcc '+e.supply+' V');a('circle',{cx:290,cy:185,r:48,class:'component',style:'fill:none'});a('line',{x1:274,y1:160,x2:274,y2:210,class:'component'});line(274,170,320,150);line(274,200,320,230);line(320,230,320,270);ground(320,270);line(40,185,100,185);resistor(100,175,85,20,'Rb '+e.rb+' Ω');line(185,185,274,185);text(64,223,'Drive '+e.drive+' V');text(367,162,'C');text(253,153,'B');text(351,241,'E');a('path',{d:'M304 207 L315 227 L293 221 Z',fill:'#e6f4ff'});text(459,189,'Vce '+labNumber(r.vce)+' V');text(459,215,r.status);
+ }else{
+  a('circle',{cx:85,cy:160,r:34,class:'component'});text(85,165,'~ AC');line(85,126,85,70);line(85,70,245,70);line(245,70,245,110);line(85,194,85,260);line(85,260,245,260);line(245,260,245,210);
+  let coil='M245 110';for(let j=0;j<4;j++){const y=110+j*25;coil+=` C285 ${y} 285 ${y+25} 245 ${y+25}`;}a('path',{d:coil,class:'component',style:'fill:none'});a('line',{x1:300,y1:95,x2:300,y2:225,class:'component'});a('line',{x1:312,y1:95,x2:312,y2:225,class:'component'});
+  coil='M365 110';for(let j=0;j<4;j++){const y=110+j*25;coil+=` C325 ${y} 325 ${y+25} 365 ${y+25}`;}a('path',{d:coil,class:'component',style:'fill:none'});line(365,110,365,70);line(365,70,535,70);line(365,210,365,260);line(365,260,535,260);line(535,70,535,125);resistor(525,125,20,70,'Rload');line(535,195,535,260);text(156,45,e.vp+' V RMS · '+e.frequency+' Hz');text(240,293,'Np '+e.np);text(370,293,'Ns '+e.ns);text(454,45,labNumber(r.vs)+' V RMS');text(580,170,e.load+' Ω');
+ }
+}
+function drawDevicePlot(e,r){
+ const svg=$('devicePlot-'+e.id);svg.replaceChildren();const a=(tag,attr,t)=>{const el=elem(tag,attr,t);svg.append(el);return el;};
+ let xmin,xmax,ymin,ymax,xlabel,ylabel,curves,marker;
+ if(e.type==='opamp'){const span=Math.max(1,Math.abs(e.vin)*1.2,e.rail/Math.max(1,Math.abs(r.gain))*1.2);xmin=-span;xmax=span;ymin=-e.rail*1.1;ymax=e.rail*1.1;xlabel='Input voltage (V)';ylabel='Output voltage (V)';curves=[{color:'#67e8f9',f:x=>calculateDevice({...e,vin:x}).vout}];marker=[e.vin,r.vout];}
+ else if(e.type==='transistor'){xmin=0;xmax=5;ymin=0;ymax=r.limit*1.1;xlabel='Base drive (V)';ylabel='Collector current (A)';curves=[{color:'#67e8f9',f:x=>calculateDevice({...e,drive:x}).ic}];marker=[e.drive,r.ic];}
+ else {xmin=0;xmax=2/e.frequency;ymax=Math.SQRT2*Math.max(e.vp,r.vs)*1.1;ymin=-ymax;xlabel='Time (s) · primary cyan / secondary yellow';ylabel='Instantaneous voltage (V)';curves=[{color:'#67e8f9',f:t=>Math.SQRT2*e.vp*Math.sin(2*Math.PI*e.frequency*t)},{color:'#facc15',f:t=>Math.SQRT2*r.vs*Math.sin(2*Math.PI*e.frequency*t)}];}
+ const X=x=>85+(x-xmin)/(xmax-xmin)*490,Y=y=>225-(y-ymin)/(ymax-ymin)*175;
+ a('text',{x:18,y:25,class:'svg-label'},ylabel);a('text',{x:330,y:286,class:'svg-small','text-anchor':'middle'},xlabel);
+ for(let j=0;j<=4;j++){const y=ymin+(ymax-ymin)*j/4,x=xmin+(xmax-xmin)*j/4;a('line',{x1:85,y1:Y(y),x2:575,y2:Y(y),stroke:'#28415b'});a('text',{x:77,y:Y(y)+4,class:'svg-small','text-anchor':'end'},Number(y.toPrecision(3)).toString());a('text',{x:X(x),y:250,class:'svg-small','text-anchor':'middle'},Number(x.toPrecision(3)).toString());}
+ if(ymin<0)a('line',{x1:85,y1:Y(0),x2:575,y2:Y(0),stroke:'#67839e'});
+ for(const curve of curves){let d='';for(let j=0;j<=200;j++){const x=xmin+(xmax-xmin)*j/200;d+=(j?'L':'M')+X(x).toFixed(2)+' '+Y(curve.f(x)).toFixed(2)+' ';}a('path',{d,stroke:curve.color,'stroke-width':2.5,fill:'none'});}
+ if(marker)a('circle',{cx:X(marker[0]),cy:Y(marker[1]),r:5,fill:'#facc15'});
+ svg.setAttribute('aria-label',ylabel+' versus '+xlabel+(marker?'; yellow marker shows selected input':''));
+}
+$('showStorage').addEventListener('click',()=>{state.workbench.active='storage';syncWorkbench();});
+$('showDevices').addEventListener('click',()=>{state.workbench.active='devices';syncWorkbench();});
+$('addExperiment').addEventListener('click',()=>{const b=state.workbench;if(b.experiments.length>=6)return;let n=1;while(b.experiments.some(e=>e.id==='exp'+n))n++;b.experiments.push(newExperiment($('experimentType').value,'exp'+n));b.active='devices';syncWorkbench();});
+$('experimentCards').addEventListener('click',event=>{const id=event.target.dataset.removeExperiment;if(!id)return;state.workbench.experiments=state.workbench.experiments.filter(e=>e.id!==id);syncWorkbench();});
+$('experimentCards').addEventListener('input',event=>{const {experiment,field}=event.target.dataset;if(!experiment||!field)return;const e=state.workbench.experiments.find(e=>e.id===experiment);if(field==='configuration')e.configuration=event.target.value;else {if(!event.target.value||!event.target.checkValidity())return;e[field]=Number(event.target.value);}renderDevice(e);});
+$('experimentCards').addEventListener('change',event=>{const {experiment,field}=event.target.dataset;if(!experiment||!field)return;const e=state.workbench.experiments.find(e=>e.id===experiment);if(!event.target.value||!event.target.checkValidity())event.target.value=e[field];});
+
+makeControls();update();challengeHint();requestAnimationFrame(animate);requestAnimationFrame(energyFrame);syncWorkbench();
 </script>
 </body>
 </html>
